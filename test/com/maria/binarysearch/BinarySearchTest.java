@@ -1,31 +1,34 @@
 package com.maria.binarysearch;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class BinarySearchTest {
 
-    @Test
-//    @ParameterizedTest
-//    @ValueSource(ints = {7, 8, 9})
-    void search() {
-        int[] nums = {-1, 0, 3, 5, 9, 12};
-        int target = 9;
-        //        int[] nums = {-1, 0, 3, 5, 9, 12};
-        //        int target = 2;
-
+    @DisplayName("My Binary Search")
+    @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#searchDataProvider")
+    void search(int[] nums, int target, int ans) {
         int pos = BinarySearch.search(nums, target);
-        Assertions.assertEquals(4, pos);
-        //        TPrinter.print(ans);
+        Assertions.assertEquals(ans, pos);
+//      TPrinter.print(ans);
     }
 
-    @Test
-    void mySqrt() {
-        int ans = BinarySearch.mySqrt(2147395599);
-        Assertions.assertEquals(46339, ans);
-        //        TPrinter.print(ans);
+    @DisplayName("Sqrt Function")
+    @ParameterizedTest(name = "{index}) the sqrt of {0} is {1}")
+    @CsvSource({
+        "2147395599, 46339"
+    })
+    void mySqrt(int number, int sqrt) {
+        int ans = BinarySearch.mySqrt(number);
+        Assertions.assertEquals(sqrt, ans);
+//      TPrinter.print(ans);
     }
 
     @Test
@@ -35,26 +38,22 @@ public class BinarySearchTest {
         TPrinter.print(ans);
     }
 
-    @Test
-    void searchNonSortedArray() {
-        int[] nums = {2, 3, 4, 5, 6, 7, 8, 0, 1};
-        int target = 8;
-        //        int[] nums = {7, 8, 1, 2, 3, 4, 5, 6};
-        //        int target = 1;
-        //        int[] nums = {5, 1, 3};
-        //        int target = 3;
-        int pos = BinarySearch.searchNonSortedArray(nums, target);
-        Assertions.assertEquals(6, pos);
-        //        TPrinter.print(pos);
+    @DisplayName("Search Non Sorted Array")
+    @ParameterizedTest(name = "{index}) {0}")
+    @ArgumentsSource(SearchNonSortedProvider.class)
+    void searchNonSortedArray(String caseName, ArrTarget arrTarget) {
+        int pos = BinarySearch.searchNonSortedArray(arrTarget.getNums(), arrTarget.getTarget());
+        Assertions.assertEquals(arrTarget.getResult(), pos);
+//      TPrinter.print(pos);
     }
 
-    @Test
-    void findMinInRotatedArray() {
-        int[] nums = {5, 0, 1, 2, 3, 4};
-        //        int[] nums = {1,2};
+    @DisplayName("Find Minimum In a Rotated Array")
+    @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#findMinInRotatedArrayProvider")
+    void findMinInRotatedArray(int[] nums, int ans) {
         int pos = BinarySearch.findMinInRotatedArray(nums);
-        Assertions.assertEquals(0, pos);
-        //        TPrinter.print(pos);
+        Assertions.assertEquals(ans, pos);
+//        TPrinter.print(pos);
     }
 
     @Test
