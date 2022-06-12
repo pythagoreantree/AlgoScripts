@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.List;
 
 public class BinarySearchTest {
 
@@ -31,6 +34,7 @@ public class BinarySearchTest {
 //      TPrinter.print(ans);
     }
 
+    @DisplayName("Guess Number")
     @Test
     void guessNumber() {
         int n = 10;
@@ -56,102 +60,105 @@ public class BinarySearchTest {
 //        TPrinter.print(pos);
     }
 
-    @Test
-    void findPivot() {
-        int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3};
-        //        int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3, 4};
-        int pivot = BinarySearch.findPivot(arr, 0, arr.length - 1);
-        Assertions.assertEquals(5, pivot);
+
+    @DisplayName("Find Pivot")
+    @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#findPivotProvider")
+    void findPivot(int[] nums, int ans) {
+        int pivot = BinarySearch.findPivot(nums, 0, nums.length - 1);
+        Assertions.assertEquals(ans, pivot);
         //        TPrinter.print(pivot);
     }
 
-    @Test
-    void findPeakElement() {
-        int[] nums = {1, 2, 1, 3, 5, 6, 4};
+    @DisplayName("Find Peak Element")
+    @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#findPeakElement")
+    void findPeakElement(int[] nums, int ans) {
         int pos = BinarySearch.findPeakElement(nums);
-        Assertions.assertEquals(5, pos);
-        //        TPrinter.print(pos);
+        Assertions.assertEquals(ans, pos);
+//        TPrinter.print(pos);
     }
 
-    @Test
-    void findPeakElementT3() {
-        int[] nums = {1, 2, 1, 3, 5, 6, 4};
+    @DisplayName("Find Peak Element V3")
+    @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#findPeakElement")
+    void findPeakElementT3(int[] nums, int ans) {
         int pos = BinarySearch.findPeakElementT3V2(nums);
-//        Assertions.assertEquals(5, pos);
-        TPrinter.print(pos);
+        Assertions.assertEquals(ans, pos);
+//        TPrinter.print(pos);
     }
 
-    @Test
-    void searchL() {
-        int[] nums = {5, 7, 7, 8, 8, 10};
-        int target = 8;
-        //        int[] nums = {};
-        //        int target = 0;
+    @DisplayName("Search Left Occurence")
+    @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#searchLeftProvider")
+    void searchL(int[] nums, int target, int ans) {
         int pos = BinarySearch.searchL(nums, target);
-        Assertions.assertEquals(3, pos);
-        //        TPrinter.print(pos);
+        Assertions.assertEquals(ans, pos);
+//      TPrinter.print(pos);
     }
 
-    @Test
-    void searchR() {
-        int[] nums = {5, 7, 7, 8, 8, 10};
-        int target = 8;
-        //        int[] nums = {};
-        //        int target = 0;
+    @DisplayName("Search Right Occurence")
+    @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#searchRightProvider")
+    void searchR(int[] nums, int target, int ans) {
         int pos = BinarySearch.searchR(nums, target);
-        Assertions.assertEquals(4, pos);
-        //        TPrinter.print(pos);
+        Assertions.assertEquals(ans, pos);
+//      TPrinter.print(pos);
     }
 
-    @Test
-    void searchLR() {
-        int[] nums = {5, 7, 7, 7, 9, 10};
-        int target = 8;
+    @DisplayName("Search Left and Right Occurences")
+    @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#searchLeftRightProvider")
+    void searchLR(int[] nums, int target, int[] res) {
         int[] ans = BinarySearch.searchLR(nums, target);
-        Assertions.assertEquals(ans[0], -1);
-        Assertions.assertEquals(ans[1], -1);
-        //        TPrinter.printArray(ans);
+        Assertions.assertEquals(ans[0], res[0]);
+        Assertions.assertEquals(ans[1], res[1]);
+//      TPrinter.printArray(ans);
     }
 
-    @Test
-    void searchRange() {
-//        int[] nums = {5, 7, 7, 8, 8, 10};
-//        int target = 4;
-        int[] nums = {2, 2};
-        int target = 2;
-        TPrinter.printArray(BinarySearch.searchRange(nums, target));
+
+    @DisplayName("Search Range")
+    @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#searchRangeProvider")
+    void searchRange(int[] nums, int target, int[] res) {
+        int[] ans = BinarySearch.searchRange(nums, target);
+        Assertions.assertEquals(ans[0], res[0]);
+        Assertions.assertEquals(ans[1], res[1]);
+//        TPrinter.printArray(ans);
     }
 
-    @Test
-    void findKClosestElements() {
-//        int[] nums = {1,2,3,4,5};
-//        int x = 3;
-//        int k = 4;
-        int[] nums = {1,2};
-        int k = 1, x = 1;
-//        int[] nums = {1,1,2,2,2,2,2,3,3};
-//        int k = 3, x = 3;
-        TPrinter.print(BinarySearch.findKClosestElements(nums, k, x));
+    @DisplayName("Find K Closest Elements")
+    @ParameterizedTest(name = "{index}) nums: {0}, x: {1}, k: {2}")
+    @MethodSource("com.maria.binarysearch.DataProvider#findKClosestElementsProvider")
+    void findKClosestElements(int[] nums, int x, int k, List<Integer> result) {
+        List<Integer> neighbours = BinarySearch.findKClosestElements(nums, k, x);
+        for (int i = 0; i < neighbours.size(); i++){
+            Assertions.assertEquals(result.get(i), neighbours.get(i));
+        }
+//        TPrinter.print(neighbours);
     }
 
-    @Test
-    void search4() {
-        int[] nums = {1,2,4,5,6};
-        int target = 4;
+    @DisplayName("Search Variant 4")
+    @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
+    @MethodSource("com.maria.binarysearch.DataProvider#search4Provider")
+    void search4(int[] nums, int target, int result) {
         int pos = BinarySearch.search4(nums, target);
-        TPrinter.print(pos);
+        Assertions.assertEquals(result, pos);
+//        TPrinter.print(pos);
     }
 
-    @Test
-    void myPow() {
-//        double x = 2.0;
-//        int n = 10;
-        double x = 2.0;
-        int n = -3;
-//        double x = 2.1;
-//        int n = 3;
+    @DisplayName("My Power Function")
+    @ParameterizedTest(name = "{index}) x: {0}, n: {1}")
+    @CsvSource({
+            "2.0, 10, 1024.0",
+            "2.0, -3, 0.125",
+            "2.1, 3, 9.262"
+    })
+    void myPow(double x, int n, double result) {
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.CEILING);
         double ans = BinarySearch.myPow(x, n);
-        TPrinter.print(ans);
-
+        Assertions.assertEquals(df.format(result), df.format(ans));
+//        TPrinter.print(ans);
     }
 }
