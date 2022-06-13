@@ -1,8 +1,5 @@
 package com.maria.binarysearch;
 
-import com.sun.tools.javac.util.List;
-import org.junit.platform.commons.util.StringUtils;
-
 import java.util.Arrays;
 
 public class ArrTarget {

@@ -1,18 +1,8 @@
 package com.maria;
 
-//import main.com.maria.binarysearch.BinarySearchTest;
-
 public class Main {
 
     public static void main(String[] args) {
-//        print(StringSuffixPrefix.getIntersectionLen(StringSuffixPrefix.s2));
-
-//        String a = "9A2Le";
-//        String b = "10ppL1";
-//        print(StringSuffixPrefix.checkStrings(a, b));
-//        BinarySearchTest.testFindPivot();
-//        BinarySearchTest.testFindPeakElement2();
-//        System.out.println(1%2);
 
     }
 
