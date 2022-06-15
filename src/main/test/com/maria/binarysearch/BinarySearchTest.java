@@ -16,7 +16,7 @@ public class BinarySearchTest {
 
     @DisplayName("My Binary Search")
     @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#searchDataProvider")
+    @MethodSource("com.maria.DataProvider#searchDataProvider")
     void search(int[] nums, int target, int ans) {
         int pos = BinarySearch.search(nums, target);
         Assertions.assertEquals(ans, pos);
@@ -53,7 +53,7 @@ public class BinarySearchTest {
 
     @DisplayName("Find Minimum In a Rotated Array")
     @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#findMinInRotatedArrayProvider")
+    @MethodSource("com.maria.DataProvider#findMinInRotatedArrayProvider")
     void findMinInRotatedArray(int[] nums, int ans) {
         int pos = BinarySearch.findMinInRotatedArray(nums);
         Assertions.assertEquals(ans, pos);
@@ -63,7 +63,7 @@ public class BinarySearchTest {
 
     @DisplayName("Find Pivot")
     @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#findPivotProvider")
+    @MethodSource("com.maria.DataProvider#findPivotProvider")
     void findPivot(int[] nums, int ans) {
         int pivot = BinarySearch.findPivot(nums, 0, nums.length - 1);
         Assertions.assertEquals(ans, pivot);
@@ -72,7 +72,7 @@ public class BinarySearchTest {
 
     @DisplayName("Find Peak Element")
     @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#findPeakElement")
+    @MethodSource("com.maria.DataProvider#findPeakElement")
     void findPeakElement(int[] nums, int ans) {
         int pos = BinarySearch.findPeakElement(nums);
         Assertions.assertEquals(ans, pos);
@@ -81,7 +81,7 @@ public class BinarySearchTest {
 
     @DisplayName("Find Peak Element V3")
     @ParameterizedTest(name = "{index}) nums: {0}, ans: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#findPeakElement")
+    @MethodSource("com.maria.DataProvider#findPeakElement")
     void findPeakElementT3(int[] nums, int ans) {
         int pos = BinarySearch.findPeakElementT3V2(nums);
         Assertions.assertEquals(ans, pos);
@@ -90,7 +90,7 @@ public class BinarySearchTest {
 
     @DisplayName("Search Left Occurence")
     @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#searchLeftProvider")
+    @MethodSource("com.maria.DataProvider#searchLeftProvider")
     void searchL(int[] nums, int target, int ans) {
         int pos = BinarySearch.searchL(nums, target);
         Assertions.assertEquals(ans, pos);
@@ -99,7 +99,7 @@ public class BinarySearchTest {
 
     @DisplayName("Search Right Occurence")
     @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#searchRightProvider")
+    @MethodSource("com.maria.DataProvider#searchRightProvider")
     void searchR(int[] nums, int target, int ans) {
         int pos = BinarySearch.searchR(nums, target);
         Assertions.assertEquals(ans, pos);
@@ -108,7 +108,7 @@ public class BinarySearchTest {
 
     @DisplayName("Search Left and Right Occurences")
     @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#searchLeftRightProvider")
+    @MethodSource("com.maria.DataProvider#searchLeftRightProvider")
     void searchLR(int[] nums, int target, int[] res) {
         int[] ans = BinarySearch.searchLR(nums, target);
         Assertions.assertEquals(ans[0], res[0]);
@@ -119,7 +119,7 @@ public class BinarySearchTest {
 
     @DisplayName("Search Range")
     @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#searchRangeProvider")
+    @MethodSource("com.maria.DataProvider#searchRangeProvider")
     void searchRange(int[] nums, int target, int[] res) {
         int[] ans = BinarySearch.searchRange(nums, target);
         Assertions.assertEquals(ans[0], res[0]);
@@ -129,7 +129,7 @@ public class BinarySearchTest {
 
     @DisplayName("Find K Closest Elements")
     @ParameterizedTest(name = "{index}) nums: {0}, x: {1}, k: {2}")
-    @MethodSource("com.maria.binarysearch.DataProvider#findKClosestElementsProvider")
+    @MethodSource("com.maria.DataProvider#findKClosestElementsProvider")
     void findKClosestElements(int[] nums, int x, int k, List<Integer> result) {
         List<Integer> neighbours = BinarySearch.findKClosestElements(nums, k, x);
         for (int i = 0; i < neighbours.size(); i++){
@@ -140,7 +140,7 @@ public class BinarySearchTest {
 
     @DisplayName("Search Variant 4")
     @ParameterizedTest(name = "{index}) nums: {0}, target: {1}")
-    @MethodSource("com.maria.binarysearch.DataProvider#search4Provider")
+    @MethodSource("com.maria.DataProvider#search4Provider")
     void search4(int[] nums, int target, int result) {
         int pos = BinarySearch.search4(nums, target);
         Assertions.assertEquals(result, pos);
@@ -160,5 +160,42 @@ public class BinarySearchTest {
         double ans = BinarySearch.myPow(x, n);
         Assertions.assertEquals(df.format(result), df.format(ans));
 //        TPrinter.print(ans);
+    }
+
+    @DisplayName("Valid Perfect Square")
+    @ParameterizedTest(name = "{index}) num: {0}, ans: {1}")
+    @CsvSource({
+            "14, false",
+            "16, true",
+            "808201, true",
+            "5, false"
+    })
+    void isPerfectSquare(int num, boolean ans) {
+        boolean result = BinarySearch.isPerfectSquare(num);
+        Assertions.assertEquals(ans, result);
+    }
+
+    @DisplayName("Find Smallest Letter Greater Than Target")
+    @ParameterizedTest
+    @MethodSource("com.maria.DataProvider#findLetterProvider")
+    void nextGreatestLetter(char[] letters, char target, char ans) {
+        char result = BinarySearch.nextGreatestLetter(letters, target);
+        Assertions.assertEquals(ans, result);
+    }
+
+    @DisplayName("Find Minimum in Rotated Sorted Array")
+    @ParameterizedTest
+    @MethodSource("com.maria.DataProvider#findMin2Provider")
+    void findMinInRotatedArray2(int[] nums, int ans) {
+        int result = BinarySearch.findMinInRotatedArray2(nums);
+        Assertions.assertEquals(ans, result);
+    }
+
+    @DisplayName("Find Minimum in Rotated Sorted Array II")
+    @ParameterizedTest
+    @MethodSource("com.maria.DataProvider#findMinWithDuplicatesProvider")
+    void findMinInRotatedArrayWithDuplicates(int[] nums, int ans) {
+        int result = BinarySearch.findMinInRotatedArrayWithDuplicates2(nums);
+        Assertions.assertEquals(ans, result);
     }
 }

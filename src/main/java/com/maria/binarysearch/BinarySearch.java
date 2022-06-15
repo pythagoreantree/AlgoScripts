@@ -8,8 +8,8 @@ import java.util.List;
 public class BinarySearch {
 
     /*
-    * Binary Search Templates Section
-    * */
+     * Binary Search Templates Section
+     * */
     public static int search(int[] nums, int target) {
         int l = 0;
         int r = nums.length - 1;
@@ -116,8 +116,8 @@ public class BinarySearch {
     }
 
     /*
-    * mySqrt Section
-    * */
+     * mySqrt Section
+     * */
     public static int mySqrt(int x) {
         if (x == 0)
             return 0;
@@ -139,8 +139,8 @@ public class BinarySearch {
     }
 
     /*
-    * Guess Number Section
-    * */
+     * Guess Number Section
+     * */
     public static int guess(int n) {
         int g = 1;
         if (n == g)
@@ -168,8 +168,8 @@ public class BinarySearch {
     }
 
     /*
-    * Search Pivoted Array Section
-    * */
+     * Search Pivoted Array Section
+     * */
     public static int searchNonSortedArray(int[] nums, int target) {
         int l = 0, r = nums.length - 1;
 
@@ -210,8 +210,8 @@ public class BinarySearch {
     }
 
     /*
-    * G4G Binary Search Pivoted Array Section
-    * */
+     * G4G Binary Search Pivoted Array Section
+     * */
     /* Java program to search an element in a sorted and pivoted array*/
     /* Searches an element key in a pivoted sorted array arr[] of size n */
     public static int pivotedBinarySearch(int arr[], int n, int key) {
@@ -268,8 +268,8 @@ public class BinarySearch {
     }
 
     /*
-    * Search Rotated Array Section
-    * */
+     * Search Rotated Array Section
+     * */
     public static int searchRotated(int arr[], int low, int high, int key) {
         if (low > high)
             return -1;
@@ -301,8 +301,8 @@ public class BinarySearch {
     }
 
     /*
-    * Find First Bad Version Section
-    * */
+     * Find First Bad Version Section
+     * */
     public static boolean isBadVersion(int n) {
         return false;
     }
@@ -326,8 +326,8 @@ public class BinarySearch {
     }
 
     /*
-    * Find Peak Element Section
-    * */
+     * Find Peak Element Section
+     * */
     public static int findPeakElement(int[] nums) {
         int l = 0, r = nums.length - 1;
         while (l < r) {
@@ -351,9 +351,9 @@ public class BinarySearch {
                 r = m;
             }
         }
-        if (nums.length == 1 || nums[l] > nums[l+1])
+        if (nums.length == 1 || nums[l] > nums[l + 1])
             return l;
-        if (r == nums.length-1 && (nums[r - 1] < nums[r]))
+        if (r == nums.length - 1 && (nums[r - 1] < nums[r]))
             return r;
         return -1;
     }
@@ -362,7 +362,7 @@ public class BinarySearch {
         int l = 0, r = nums.length - 1;
         while (l + 1 < r) {
             int m = l + (r - l) / 2;
-            if (nums[m-1] < nums[m] && nums[m] > nums[m+1]){
+            if (nums[m - 1] < nums[m] && nums[m] > nums[m + 1]) {
                 return m;
             } else if (nums[m - 1] <= nums[m]) {
                 l = m;
@@ -370,7 +370,7 @@ public class BinarySearch {
                 r = m;
             }
         }
-        if (nums[l] > nums[r]){
+        if (nums[l] > nums[r]) {
             return l;
         } else {
             return r;
@@ -385,26 +385,26 @@ public class BinarySearch {
             return 0;
 
         int left = 0, right = nums.length - 1;
-        while (left + 1 < right){
+        while (left + 1 < right) {
             int mid = left + (right - left) / 2;
-            if (nums[mid-1] < nums[mid] && nums[mid+1] < nums[mid])
+            if (nums[mid - 1] < nums[mid] && nums[mid + 1] < nums[mid])
                 return mid;
-            else if (nums[mid] < nums[mid+1])
+            else if (nums[mid] < nums[mid + 1])
                 left = mid;
             else
                 right = mid;
         }
 
-        if (nums[left] > nums[left+1])
+        if (nums[left] > nums[left + 1])
             return left;
-        if (nums[right] > nums[right-1])
+        if (nums[right] > nums[right - 1])
             return right;
         return -1;
     }
 
     /*
-    * Find Min in Rotated Array Section
-    * */
+     * Find Min in Rotated Array Section
+     * */
     public static int findMinInRotatedArray(int[] nums) {
         int l = 0, r = nums.length - 1;
         while (l < r) {
@@ -433,8 +433,8 @@ public class BinarySearch {
     //    }
 
     /*
-    * Search Range Section
-    * */
+     * Search Range Section
+     * */
     public static int searchL(int[] nums, int target) {
         if (nums == null || nums.length == 0)
             return -1;
@@ -463,7 +463,7 @@ public class BinarySearch {
         while (left < right) {
             // Prevent (left + right) overflow
             int mid = left + (right - left) / 2;
-            if (nums[mid] == target && ((mid+1) == nums.length || nums[mid+1] > target)){
+            if (nums[mid] == target && ((mid + 1) == nums.length || nums[mid + 1] > target)) {
                 return mid;
             } else if (nums[mid] > target) {
                 right = mid;
@@ -477,7 +477,7 @@ public class BinarySearch {
         return -1;
     }
 
-    public static int[] searchLR(int[] nums, int target){
+    public static int[] searchLR(int[] nums, int target) {
         int[] res = new int[]{-1, -1};
         res[0] = searchL(nums, target);
         res[1] = searchR(nums, target);
@@ -487,12 +487,13 @@ public class BinarySearch {
     public static int[] searchRange(int[] nums, int target) {
         int[] res = new int[]{-1, -1};
         res[0] = searchFirstLastElement(nums, target, true);
-        if (res[0] == -1) return res;
+        if (res[0] == -1)
+            return res;
         res[1] = searchFirstLastElement(nums, target, false);
         return res;
     }
 
-    public static int searchFirstLastElement(int[] nums, int target, boolean isFirst){
+    public static int searchFirstLastElement(int[] nums, int target, boolean isFirst) {
         if (nums == null || nums.length == 0)
             return -1;
 
@@ -500,7 +501,7 @@ public class BinarySearch {
         while (left + 1 < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
-                if (isFirst){
+                if (isFirst) {
                     right = mid;
                 } else {
                     left = mid;
@@ -512,12 +513,16 @@ public class BinarySearch {
             }
         }
 
-        if (isFirst){
-            if (nums[left] == target) return left;
-            else if (nums[right] == target) return right;
+        if (isFirst) {
+            if (nums[left] == target)
+                return left;
+            else if (nums[right] == target)
+                return right;
         } else {
-            if (nums[right] == target) return right;
-            else if (nums[left] == target) return left;
+            if (nums[right] == target)
+                return right;
+            else if (nums[left] == target)
+                return left;
         }
         return -1;
     }
@@ -545,46 +550,46 @@ public class BinarySearch {
     }*/
 
     /*
-    * Find K Closest Elements Section
-    */
+     * Find K Closest Elements Section
+     */
     public static List<Integer> findKClosestElements(int[] nums, int k, int x) {
         ArrayList<Integer> alist = new ArrayList<>();
         if (nums == null || nums.length == 0 || k <= 0)
             return alist;
 
         int left = 0, right = nums.length - k;
-        while (left < right){
+        while (left < right) {
             int mid = left + (right - left) / 2;
-//            if (x - nums[mid] > nums[mid+k] - x){
-            if (p(nums[mid], x) == p(nums[mid+k], x)){
-                if (nums[mid] <= x && x <= nums[mid + k]){
+            //            if (x - nums[mid] > nums[mid+k] - x){
+            if (p(nums[mid], x) == p(nums[mid + k], x)) {
+                if (nums[mid] <= x && x <= nums[mid + k]) {
                     right = mid;
-                } else if (x <= nums[mid]){
+                } else if (x <= nums[mid]) {
                     right = mid;
                 } else {
                     left = mid + 1;
                 }
-            } else if (p(nums[mid], x) > p(nums[mid+k], x)){
+            } else if (p(nums[mid], x) > p(nums[mid + k], x)) {
                 left = mid + 1;
             } else {
                 right = mid;
             }
         }
 
-//        Main.print("Left: " + left);
-//        Main.print("Right: " + right);
-        for (int i = left; i<(left + k); i++){
+        //        Main.print("Left: " + left);
+        //        Main.print("Right: " + right);
+        for (int i = left; i < (left + k); i++) {
             alist.add(nums[i]);
         }
 
         return alist;
     }
 
-    public static int p(int a, int b){
+    public static int p(int a, int b) {
         return Math.abs(a - b);
     }
 
-    public static boolean isCloser(int a, int b, int x){
+    public static boolean isCloser(int a, int b, int x) {
         return (Math.abs(a - x) < Math.abs(b - x)) || (Math.abs(a - x) == Math.abs(b - x) && a < b);
     }
 
@@ -599,30 +604,30 @@ public class BinarySearch {
 
         int leftDist = p(nums[left], nums[index]);
         int rightDist = p(nums[right], nums[index]);
-//        int leftNum = index - left;
-//        int rightNum = right - index + 1 ;
-//        int num = leftNum + rightNum;
+        //        int leftNum = index - left;
+        //        int rightNum = right - index + 1 ;
+        //        int num = leftNum + rightNum;
 
         while (right - left + 1 > k) {
             int m1 = left + (index - left) / 2;
             int m2 = index + (right - index) / 2;
-            if (m2 - m1 + 1 >= k){
-                if (leftDist > p(nums[m1], nums[index])){
+            if (m2 - m1 + 1 >= k) {
+                if (leftDist > p(nums[m1], nums[index])) {
                     left = m1;
                 }
-                if (rightDist > p(nums[m2], nums[index])){
+                if (rightDist > p(nums[m2], nums[index])) {
                     right = m2;
                 }
             } else {
-                if (rightDist > p(nums[m2], nums[index])){
+                if (rightDist > p(nums[m2], nums[index])) {
                     right = m2;
                 }
             }
         }
 
-//        Main.print("Left: " + left);
-//        Main.print("Right: " + right);
-        for (int i = left; i<= right; i++){
+        //        Main.print("Left: " + left);
+        //        Main.print("Right: " + right);
+        for (int i = left; i <= right; i++) {
             alist.add(nums[i]);
         }
 
@@ -634,12 +639,13 @@ public class BinarySearch {
      * */
     public static double myPow(double x, int n) {
         double temp;
-        if(n == 0) return 1;
+        if (n == 0)
+            return 1;
         temp = myPow(x, n / 2);
         if (n % 2 == 0)
-            return temp*temp;
+            return temp * temp;
         else {
-            if(n > 0)
+            if (n > 0)
                 return x * temp * temp;
             else
                 return temp * temp * (1 / x);
@@ -648,8 +654,7 @@ public class BinarySearch {
 
 
     //O(n)
-    public static int power(int x, int y)
-    {
+    public static int power(int x, int y) {
         if (y == 0)
             return 1;
         else if (y % 2 == 0)
@@ -657,34 +662,168 @@ public class BinarySearch {
         else
             return x * power(x, y / 2) * power(x, y / 2);
     }
+
     /*
-    * Rubbish Section with comments and some intermediate code/solutions
+     * Valid Perfect Square
+     * */
+    public static boolean isPerfectSquare(int num) {
+        if (num == 0)
+            return true;
+
+        int l = 1, r = num / 2;
+
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (m == num / m && num % m == 0) {
+                return true;
+            } else if (m <= num / m) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
+        }
+        if (l * l == num || r * r == num)
+            return true;
+        return false;
+    }
+
+    /*
+     * Find Smallest Letter Greater Than Target
+     * */
+    public static char nextGreatestLetter(char[] letters, char target) {
+        int l = 0, r = letters.length - 1;
+
+        if (target >= letters[r]) {
+            return letters[l];
+        }
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (letters[m] <= target) {
+                l = m + 1;
+            } else {
+                r = m;
+            }
+        }
+        return letters[r];
+    }
+
+    /*
+    * Find Min in Rotated Array 2
     * */
-//        if (x < nums[0]){
-//            int end = k < nums.length? k: nums.length;
-//            for(int i = 0; i<end; i++){
-//                alist.add(nums[i]);
-//            }
-//            return alist;
-//        } else if (x > nums[nums.length-1]){
-//            int start = k < nums.length? nums.length - k: 0;
-//            for(int i = start; i<nums.length; i++){
-//                alist.add(nums[i]);
-//            }
-//            return alist;
-//        }
-//
-//        if (nums[mid] < x && p(nums[left], x) > p(nums[mid], x)){
-//            left = mid;
-//        } else if (nums[mid] > x && p(nums[right], x) > p(nums[mid], x)){
-//            right = mid;
-//        } else {
-//            //we are into the range. what we gonna do?
-//            if (nums[mid] == x){
-//                right = mid;
-//            } else if(nums[mid] < x){
-//                left = mid;
-//            }
-//        }
+    public static int findMinInRotatedArray2(int[] nums) {
+        int l = 0, r = nums.length - 1;
+
+        if (nums[l] <= nums[r])
+            return nums[l];
+
+        while (l + 1 < r){
+            int m = l + (r - l) / 2;
+            if (nums[l] < nums[m]){
+                l = m;
+            } else if (nums[l] > nums[m]){
+                r = m;
+            }
+        }
+
+        if (nums[l] > nums[r]) return nums[r];
+        return -1;
+    }
+
+    /*
+    * Rotated Array may have duplicates
+    * */
+    public static int findMinInRotatedArrayWithDuplicates(int[] nums) {
+        int l = 0, r = nums.length - 1;
+
+        if (l == r)
+            return nums[l];
+
+        while (l < r){
+            int m = l + (r - l) / 2;
+            if (nums[l] < nums[m] && nums[l] < nums[r]){
+                return nums[l];
+            } else if (nums[l] == nums[m] && nums[l] == nums[r]) {
+                int d = whichDirection(nums, m);
+                switch(d){
+                    case 0:
+                    case -2:
+                    case 2:
+                        return nums[m];
+                    case -1:
+                        r = m;
+                        break;
+                    case 1:
+                        l = m + 1;
+                        break;
+                }
+            } else if (nums[l] <= nums[m] && nums[l] >= nums[r]){
+                l = m + 1;
+            } else {
+                r = m;
+            }
+        }
+        if (l == r) return nums[l];
+        return -1;
+    }
+
+    private static int whichDirection(int[] nums, int middle){
+        int fp = middle;
+        int sp = middle;
+        int middleValue = nums[middle];
+        while (fp != 0 && sp != nums.length &&
+                nums[fp] == middleValue && nums[sp] == middleValue){
+            fp--;
+            sp++;
+        }
+        if(nums[fp] != middleValue && nums[fp] < middleValue) return -1;
+        if(nums[fp] != middleValue && nums[fp] > middleValue) return -2;
+        if(nums[sp] != middleValue && nums[sp] < middleValue) return 1;
+        if(nums[sp] != middleValue && nums[sp] > middleValue) return 2;
+        return 0;
+    }
+
+    public static int findMinInRotatedArrayWithDuplicates2(int[] nums){
+        int l= 0, r = nums.length - 1;
+        while(l < r) {
+            int m = l + (r-l)/2;
+            if(nums[m] > nums[r])
+                l = m + 1;
+            else if(nums[m] < nums[r])
+                r = m;
+            else {
+                r--;
+            }
+        }
+        return nums[l];
+    }
+    /*
+     * Rubbish Section with comments and some intermediate code/solutions
+     * */
+    //        if (x < nums[0]){
+    //            int end = k < nums.length? k: nums.length;
+    //            for(int i = 0; i<end; i++){
+    //                alist.add(nums[i]);
+    //            }
+    //            return alist;
+    //        } else if (x > nums[nums.length-1]){
+    //            int start = k < nums.length? nums.length - k: 0;
+    //            for(int i = start; i<nums.length; i++){
+    //                alist.add(nums[i]);
+    //            }
+    //            return alist;
+    //        }
+    //
+    //        if (nums[mid] < x && p(nums[left], x) > p(nums[mid], x)){
+    //            left = mid;
+    //        } else if (nums[mid] > x && p(nums[right], x) > p(nums[mid], x)){
+    //            right = mid;
+    //        } else {
+    //            //we are into the range. what we gonna do?
+    //            if (nums[mid] == x){
+    //                right = mid;
+    //            } else if(nums[mid] < x){
+    //                left = mid;
+    //            }
+    //        }
 
 }
