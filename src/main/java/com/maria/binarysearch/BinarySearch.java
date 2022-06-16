@@ -11,20 +11,24 @@ public class BinarySearch {
      * Binary Search Templates Section
      * */
     public static int search(int[] nums, int target) {
-        int l = 0;
-        int r = nums.length - 1;
+        return searchInRange(nums, target, 0, nums.length - 1);
+    }
+
+    public static int searchInRange(int[] nums, int target, int start, int end) {
+        int l = start, r = end;
         while (l < r) {
             int m = (l + r) / 2;
-            if (nums[m] >= target)
+            if (nums[m] == target) {
+                return m;
+            } else if (nums[m] > target) {
                 r = m;
-            else
+            } else {
                 l = m + 1;
+            }
         }
-        if (nums[l] == target) {
+        if (nums[l] == target)
             return l;
-        } else {
-            return -1;
-        }
+        return -1;
     }
 
     public static int search1(int[] nums, int target) {

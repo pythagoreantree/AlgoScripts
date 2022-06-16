@@ -131,5 +131,28 @@ public class DataProvider {
 		);
 	}
 
+	public static Stream<Arguments> twoSumProvider(){
+		return Stream.of(
+				arguments(new int[]{2,7,11,15}, 9, new int[]{1,2}),
+				arguments(new int[]{2,3,4}, 6, new int[]{1,3}),
+				arguments(new int[]{-1,0}, -1, new int[]{1,2})
+		);
+	}
+
+	public static Stream<Arguments> findDuplicateNumberProvider(){
+		return Stream.of(
+				arguments(new int[]{1,3,4,2,2}, 2),
+				arguments(new int[]{3,1,3,4,2}, 3),
+				arguments(new int[]{1,1}, 1)
+		);
+	}
+
+	public static Stream<Arguments> findMedianTwoSortedProvider(){
+		return Stream.of(
+				arguments(new int[]{1,3}, new int[]{2}, 2.0),
+				arguments(new int[]{1,3}, new int[]{2,4}, 2.5)
+		);
+	}
+
 
 }
