@@ -62,7 +62,7 @@ class CommonTest {
     @ParameterizedTest
     @MethodSource("com.maria.DataProvider#findMedianTwoSortedProvider")
     void findMedianOfTwoSortedArrays(int[] nums1, int[] nums2, double ans) {
-        double result = Common.findMedianOfTwoSortedArrays(nums1, nums2);
+        double result = Common.getMedian(nums1, nums2);
         System.out.println(result);
     }
 }

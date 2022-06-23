@@ -379,16 +379,16 @@ public class Common {
     }
 
     /*
-    * Find the Duplicate Number
-    * */
-    public static int findDuplicate(int[] nums){
+     * Find the Duplicate Number
+     * */
+    public static int findDuplicate(int[] nums) {
         int[] rawNums = new int[nums.length - 1];
-        for(int i = 0; i < nums.length - 1; i++){
+        for (int i = 0; i < nums.length - 1; i++) {
             rawNums[i] = i + 1;
         }
-        for(int i = 0; i < nums.length; i++){
+        for (int i = 0; i < nums.length; i++) {
             int idx = nums[i] - 1;
-            if (rawNums[idx] > 0){
+            if (rawNums[idx] > 0) {
                 rawNums[idx] = 0;
             } else {
                 return nums[i];
@@ -399,16 +399,16 @@ public class Common {
     }
 
     /*
-    * Median of Two Sorted Arrays
-    * */
+     * Median of Two Sorted Arrays
+     * */
     public static double findMedianOfTwoSortedArrays(int[] nums1, int[] nums2) {
         if (nums1.length > nums2.length)
             return findMedianOfTwoSortedArrays(nums2, nums1);
         int total = nums1.length + nums2.length;
         int l = 0, r = nums1.length;
-        while (true){
-            int m1 = (l + r)/2;
-            int m2 = (total + 1)/2 - m1;
+        while (true) {
+            int m1 = (l + r) / 2;
+            int m2 = (total + 1) / 2 - m1;
 
             int left1 = m1 > 0? nums1[m1 - 1]: Integer.MIN_VALUE;
             int right1 = m1 < nums1.length? nums1[m1]: Integer.MAX_VALUE;
@@ -416,9 +416,9 @@ public class Common {
             int left2 = m2 > 0? nums2[m2 - 1]: Integer.MIN_VALUE;
             int right2 = m2 < nums2.length? nums2[m2]: Integer.MAX_VALUE;
 
-            if (left1 <= right2 && left2 <= right1){
-                if (total%2 == 0){
-                    return Double.valueOf(Math.max(left1, left2) + Math.min(right1, right2))/2;
+            if (left1 <= right2 && left2 <= right1) {
+                if (total % 2 == 0) {
+                    return Double.valueOf(Math.max(left1, left2) + Math.min(right1, right2)) / 2;
                 } else {
                     return Double.valueOf(Math.max(left1, left2));
                 }
@@ -429,4 +429,31 @@ public class Common {
             }
         }
     }
+
+    // Function to calculate median
+    public static double getMedian(int ar1[], int ar2[]) {
+
+        // Current index of input array ar1[]
+        int i = 0, j = 0;
+        int m1 = -1, m2 = -1;
+        int n = ar1.length, m = ar2.length;
+
+        for (int count = 0; count <= (n + m) / 2; count++) {
+            if ((m + n) % 2 != 1) {
+                m2 = m1;
+            }
+            if (i != n && j != m) {
+                m1 = (ar1[i] > ar2[j])? ar2[j++]: ar1[i++];
+            } else if (i < n) {
+                m1 = ar1[i++];
+            } else {
+                m1 = ar2[j++];
+            }
+        }
+        if ((m + n) % 2 != 1){
+            return (Double.valueOf(m1) + m2) / 2;
+        }
+        return m1;
+    }
+
 }
