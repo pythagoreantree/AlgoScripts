@@ -212,4 +212,44 @@ public class Recursion {
         }
         return p.get(rowIndex);
     }
+
+    public static Map<Integer, Integer> dp3 = new HashMap<>();
+
+    public static int fib1(int n) {
+        if (n < 2)
+            return n;
+        if (dp3.containsKey(n))
+            return dp3.get(n);
+        int val = fib1(n - 1) + fib1(n - 2);
+        dp3.put(n, val);
+        return val;
+    }
+
+    public static List<Integer> dp4 = new ArrayList<>();
+    public static int fib2(int n) {
+        if (n < 2) return n;
+        dp4.add(0);
+        dp4.add(1);
+
+        int i = 2;
+        while (i <= n) {
+            dp4.add(dp4.get(i-1) + dp4.get(i-2));
+            i++;
+        }
+
+        return dp4.get(dp4.size()-1);
+    }
+
+    public static int fib3(int n) {
+        if (n < 2) return n;
+
+        int i = 2, num = 1, result = 1;
+        while (i < n) {
+            int n2 = result;
+            result += num;
+            num = n2;
+            i++;
+        }
+        return result;
+    }
 }

@@ -61,4 +61,25 @@ class RecursionTest {
     }
 
 
+    @Test
+    void fib1() {
+        for (int i = 0; i <= 20; i++){
+            System.out.print(Recursion.fib1(i) + " ");
+        }
+    }
+
+    @Test
+    void fib2() {
+        for (int i = 0; i <= 20; i++){
+            System.out.print(Recursion.fib2(i) + " ");
+            Recursion.dp4.clear();
+        }
+    }
+
+    @Test
+    void fib3() {
+        for (int i = 0; i <= 20; i++){
+            System.out.print(Recursion.fib3(i) + " ");
+        }
+    }
 }
