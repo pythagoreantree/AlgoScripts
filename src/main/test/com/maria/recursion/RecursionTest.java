@@ -82,4 +82,9 @@ class RecursionTest {
             System.out.print(Recursion.fib3(i) + " ");
         }
     }
+
+    @Test
+    void climbStairs() {
+        System.out.println(Recursion.climbStairs(4));
+    }
 }

@@ -226,22 +226,25 @@ public class Recursion {
     }
 
     public static List<Integer> dp4 = new ArrayList<>();
+
     public static int fib2(int n) {
-        if (n < 2) return n;
+        if (n < 2)
+            return n;
         dp4.add(0);
         dp4.add(1);
 
         int i = 2;
         while (i <= n) {
-            dp4.add(dp4.get(i-1) + dp4.get(i-2));
+            dp4.add(dp4.get(i - 1) + dp4.get(i - 2));
             i++;
         }
 
-        return dp4.get(dp4.size()-1);
+        return dp4.get(dp4.size() - 1);
     }
 
     public static int fib3(int n) {
-        if (n < 2) return n;
+        if (n < 2)
+            return n;
 
         int i = 2, num = 1, result = 1;
         while (i < n) {
@@ -251,5 +254,23 @@ public class Recursion {
             i++;
         }
         return result;
+    }
+
+    public static int climbStairs(int n) {
+        return climb(0, n);
+    }
+
+    public static Map<Integer, Integer> dpCLimb = new HashMap<>();
+    public static int climb(int level, int target) {
+        if (level == target)
+            return 1;
+        if (level > target)
+            return 0;
+        if (dpCLimb.containsKey(level)){
+            return dpCLimb.get(level);
+        }
+        int levelCount = climb(level + 1, target) + climb(level + 2, target);
+        dpCLimb.put(level, levelCount);
+        return levelCount;
     }
 }
