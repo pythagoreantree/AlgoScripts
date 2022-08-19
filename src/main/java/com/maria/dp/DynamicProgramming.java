@@ -8,10 +8,10 @@ public class DynamicProgramming {
     public static Map<Integer, Integer> dp = new HashMap<>();
 
     public static int minCostTickets(int[] days, int[] costs) {
-        int a = countCost(days, costs, 0, costs[0]);
-        int b = countCost(days, costs, 0, costs[1]);
-        int c = countCost(days, costs, 0, costs[2]);
-        return Math.min(a, Math.min(b, c));
+        map.put(1, costs[0]);
+        map.put(7, costs[1]);
+        map.put(30, costs[2]);
+        return countCost(days, 0);
     }
 
     /*public static int countCost1(int[] days, int[] costs, int index, int totalCost) {
@@ -76,35 +76,61 @@ public class DynamicProgramming {
         return minVal;
     }*/
 
-    public static int countCost(int[] days, int[] costs, int index, int cost){
-        int endNum = 0;
-        if (cost == costs[0])
-            //i need just next index
-            endNum = days[index];
-        else if (cost == costs[1])
-            endNum = days[index] + 6;
-        else if (cost == costs[2])
-            endNum = days[index] + 29;
-        //if (totalCost > minimum)
-        //    return;
-        //find first number greater than end number
-        int j = index;
-        while (j < days.length && days[j] <= endNum){
-            j++;
+    public static Map<Integer, Integer> map = new HashMap<>();
+    public static int countCost(int[] days, int index){
+        if (index == days.length) {
+            return 0;
         }
-        //if EOF then stop
-        if (j == days.length) {
-            return cost;
+        if (dp.containsKey(index)){
+            return dp.get(index);
         }
-        if (dp.containsKey(j)){
-            return dp.get(j);
+
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+            int d = entry.getKey();
+            int c = entry.getValue();
+            int j = index;
+            while (j < days.length && days[j] < days[index] + d){
+                j++;
+            }
+            int calcCost = c + countCost(days, j);
+            if (!dp.containsKey(index)){
+                dp.put(index, Integer.MAX_VALUE);
+            }
+            dp.put(index, Math.min(dp.get(index), calcCost));
         }
-        //if cost less than minimum now its minimum
-        int one = cost + countCost(days, costs, j, costs[0]);
-        int two = cost + countCost(days, costs, j, costs[1]);
-        int three = cost + countCost(days, costs, j, costs[2]);
-        int minVal = Math.min(one, Math.min(two, three));
-        dp.put(index, minVal);
-        return minVal;
+        return dp.get(index);
+    }
+
+    public int minCostTickets1(int[] days, int[] costs) {
+        Map<Integer, Integer> dp = new HashMap<>();
+        Map<Integer, Integer> hm = new HashMap<>();
+        hm.put(1, costs[0]);
+        hm.put(7, costs[1]);
+        hm.put(30, costs[2]);
+        return countCost(days, 0, hm, dp);
+    }
+
+    public int countCost(int[] days, int index, Map<Integer, Integer> map, Map<Integer, Integer> dp){
+        if (index == days.length) {
+            return 0;
+        }
+        if (dp.containsKey(index)){
+            return dp.get(index);
+        }
+
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+            int d = entry.getKey();
+            int c = entry.getValue();
+            int j = index;
+            while (j < days.length && days[j] < days[index] + d){
+                j++;
+            }
+            int calcCost = c + countCost(days, j, map, dp);
+            if (!dp.containsKey(index)){
+                dp.put(index, Integer.MAX_VALUE);
+            }
+            dp.put(index, Math.min(dp.get(index), calcCost));
+        }
+        return dp.get(index);
     }
 }
