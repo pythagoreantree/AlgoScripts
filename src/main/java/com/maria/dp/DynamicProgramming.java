@@ -14,6 +14,31 @@ public class DynamicProgramming {
         return countCost(days, 0);
     }
 
+    public static Map<Integer, Integer> map = new HashMap<>();
+    public static int countCost(int[] days, int index){
+        if (index == days.length) {
+            return 0;
+        }
+        if (dp.containsKey(index)){
+            return dp.get(index);
+        }
+
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+            int d = entry.getKey();
+            int c = entry.getValue();
+            int j = index;
+            while (j < days.length && days[j] < days[index] + d){
+                j++;
+            }
+            int calcCost = c + countCost(days, j);
+            if (!dp.containsKey(index)){
+                dp.put(index, Integer.MAX_VALUE);
+            }
+            dp.put(index, Math.min(dp.get(index), calcCost));
+        }
+        return dp.get(index);
+    }
+
     /*public static int countCost1(int[] days, int[] costs, int index, int totalCost) {
         totalCost += costs[0];
         int j = index + 1;
@@ -75,62 +100,4 @@ public class DynamicProgramming {
         dp.put(days[index], minVal);
         return minVal;
     }*/
-
-    public static Map<Integer, Integer> map = new HashMap<>();
-    public static int countCost(int[] days, int index){
-        if (index == days.length) {
-            return 0;
-        }
-        if (dp.containsKey(index)){
-            return dp.get(index);
-        }
-
-        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
-            int d = entry.getKey();
-            int c = entry.getValue();
-            int j = index;
-            while (j < days.length && days[j] < days[index] + d){
-                j++;
-            }
-            int calcCost = c + countCost(days, j);
-            if (!dp.containsKey(index)){
-                dp.put(index, Integer.MAX_VALUE);
-            }
-            dp.put(index, Math.min(dp.get(index), calcCost));
-        }
-        return dp.get(index);
-    }
-
-    public int minCostTickets1(int[] days, int[] costs) {
-        Map<Integer, Integer> dp = new HashMap<>();
-        Map<Integer, Integer> hm = new HashMap<>();
-        hm.put(1, costs[0]);
-        hm.put(7, costs[1]);
-        hm.put(30, costs[2]);
-        return countCost(days, 0, hm, dp);
-    }
-
-    public int countCost(int[] days, int index, Map<Integer, Integer> map, Map<Integer, Integer> dp){
-        if (index == days.length) {
-            return 0;
-        }
-        if (dp.containsKey(index)){
-            return dp.get(index);
-        }
-
-        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
-            int d = entry.getKey();
-            int c = entry.getValue();
-            int j = index;
-            while (j < days.length && days[j] < days[index] + d){
-                j++;
-            }
-            int calcCost = c + countCost(days, j, map, dp);
-            if (!dp.containsKey(index)){
-                dp.put(index, Integer.MAX_VALUE);
-            }
-            dp.put(index, Math.min(dp.get(index), calcCost));
-        }
-        return dp.get(index);
-    }
 }
