@@ -18,13 +18,15 @@ public class DynamicProgramming {
                 endNum = days[index];
                 break;
             case 7:
-                endNum = days[index] + 7;
+                endNum = days[index] + 6;
                 break;
             case 15:
-                endNum = days[index] + 30;
+                endNum = days[index] + 29;
                 break;
         }
         totalCost += cost;
+//        if (totalCost > minimum)
+//            return;
         //find first number greater than end number
         int j = 0;
         while (j < days.length && days[j] <= endNum){
