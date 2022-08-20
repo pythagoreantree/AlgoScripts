@@ -2,9 +2,7 @@ package com.maria.dp;
 
 import com.maria.Main;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class DynamicProgramming {
 
@@ -104,32 +102,40 @@ public class DynamicProgramming {
         return minVal;
     }*/
 
-    public static Map<Integer, Integer> stepsForSum = new HashMap<>();
+    public static Map<Long, Integer> stepsForSum = new HashMap<>();
+    public static List<Integer> dp2;
+    public static int gAmount;
     public static int coinChange(int[] coins, int amount){
+        gAmount = amount;
+        dp2 = new ArrayList<>();
+        for (int i = 0; i < amount; i++){
+            dp2.add(-1);
+        }
+        return coinCalc(coins, amount, 0);
+    }
+
+    public static int coinCalc(int[] coins, int amount, int iter){
         if (amount == 0)
             return 0;
         if (amount < 0)
             return -1;
-        if (stepsForSum.containsKey(amount))
-            return stepsForSum.get(amount);
-
-        if (!stepsForSum.containsKey(amount)){
-            stepsForSum.put(amount, -1);
-        }
+        if (dp2.get(gAmount - amount) >= 0)
+            return dp2.get(gAmount - amount);
 
         for (int i = 0; i < coins.length; i++) {
-            int res = coinChange(coins, amount - coins[i]);
-            if (res != -1) {
-                int value = stepsForSum.get(amount);
-                value = (value == -1) ? res + 1 : Math.min(value, res + 1);
-                stepsForSum.put(amount, value);
+            int res = coinCalc(coins, amount - coins[i], iter + 1);
+            if (res != -1){
+                if (dp2.get(iter) == -1) {
+                    dp2.set(iter, res + 1);
+                } else {
+                    dp2.set(iter, Math.min(dp2.get(iter), res + 1));
+                }
             }
         }
-
-        return stepsForSum.get(amount);
+        return dp2.get(iter);
     }
 
-    /*public static int calcAmount(int[] coins, int amount, long sum){
+    public static int calcAmount(int[] coins, int amount, long sum){
         if (Long.valueOf(amount).equals(sum))
             return 0;
         if (Long.valueOf(amount) < sum)
@@ -156,7 +162,7 @@ public class DynamicProgramming {
         }
 
         return stepsForSum.get(sum);
-    }*/
+    }
 
     public static int coinChange2(int[] coins, int amount) {
         int[] dp = new int[amount + 1];

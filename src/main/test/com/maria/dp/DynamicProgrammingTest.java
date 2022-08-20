@@ -2,6 +2,7 @@ package com.maria.dp;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -93,5 +94,24 @@ class DynamicProgrammingTest {
         int minNum = DynamicProgramming.coinChange(coins, amount);
         System.out.println(minNum);
         Assertions.assertEquals(2, minNum);
+    }
+
+    @Test
+    void coinChange5() {
+        int[] coins = {1,2,5};
+        int amount = 11;
+        int minNum = DynamicProgramming.coinChange(coins, amount);
+        System.out.println(minNum);
+        Assertions.assertEquals(3, minNum);
+    }
+
+    @Test
+    @Disabled
+    void coinChange6() {
+        int[] coins = { 186,419,83, 408};
+        int amount = 6249;
+        int minNum = DynamicProgramming.coinChange(coins, amount);
+        System.out.println(minNum);
+        //        Assertions.assertEquals(2, minNum);
     }
 }
