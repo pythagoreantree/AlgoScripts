@@ -1,5 +1,8 @@
 package com.maria.dp;
 
+import com.maria.Main;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,4 +103,72 @@ public class DynamicProgramming {
         dp.put(days[index], minVal);
         return minVal;
     }*/
+
+    public static Map<Integer, Integer> stepsForSum = new HashMap<>();
+    public static int coinChange(int[] coins, int amount){
+        if (amount == 0)
+            return 0;
+        if (amount < 0)
+            return -1;
+        if (stepsForSum.containsKey(amount))
+            return stepsForSum.get(amount);
+
+        if (!stepsForSum.containsKey(amount)){
+            stepsForSum.put(amount, -1);
+        }
+
+        for (int i = 0; i < coins.length; i++) {
+            int res = coinChange(coins, amount - coins[i]);
+            if (res != -1) {
+                int value = stepsForSum.get(amount);
+                value = (value == -1) ? res + 1 : Math.min(value, res + 1);
+                stepsForSum.put(amount, value);
+            }
+        }
+
+        return stepsForSum.get(amount);
+    }
+
+    /*public static int calcAmount(int[] coins, int amount, long sum){
+        if (Long.valueOf(amount).equals(sum))
+            return 0;
+        if (Long.valueOf(amount) < sum)
+            return -1;
+        if (stepsForSum.containsKey(sum))
+            return stepsForSum.get(sum);
+
+        if (!stepsForSum.containsKey(sum)){
+            stepsForSum.put(sum, -1);
+        }
+
+        for (int i = 0; i < coins.length; i++) {
+            long interSum = sum + coins[i];
+            int res = -1;
+            if (interSum <= Long.valueOf(amount)) {
+                res = calcAmount(coins, amount, interSum);
+            }
+            //if smth good is returned
+            if (res != -1) {
+                int value = stepsForSum.get(sum);
+                value = (value == -1) ? res + 1 : Math.min(value, res + 1);
+                stepsForSum.put(sum, value);
+            }
+        }
+
+        return stepsForSum.get(sum);
+    }*/
+
+    public static int coinChange2(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int c : coins) {
+                if (c <= i) {
+                    dp[i] = Math.min(dp[i], 1 + dp[i - c]);
+                }
+            }
+        }
+        return dp[amount] != (amount + 1) ? dp[amount] : -1;
+    }
 }

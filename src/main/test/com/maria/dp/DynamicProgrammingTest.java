@@ -1,5 +1,7 @@
 package com.maria.dp;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +14,7 @@ class DynamicProgrammingTest {
         int[] costs = {2, 7, 15};
         int minCost = DynamicProgramming.minCostTickets(days, costs);
         System.out.println(minCost);
+        Assertions.assertEquals(7, minCost);
     }
 
     @Test
@@ -20,6 +23,7 @@ class DynamicProgrammingTest {
         int[] costs = {2, 7, 15};
         int minCost = DynamicProgramming.minCostTickets(days, costs);
         System.out.println(minCost);
+        Assertions.assertEquals(11, minCost);
     }
 
     @Test
@@ -28,6 +32,7 @@ class DynamicProgrammingTest {
         int[] costs = {1, 4, 20};
         int minCost = DynamicProgramming.minCostTickets(days, costs);
         System.out.println(minCost);
+        Assertions.assertEquals(3, minCost);
     }
 
     @Test
@@ -36,6 +41,7 @@ class DynamicProgrammingTest {
         int[] costs = {21,115,345};
         int minCost = DynamicProgramming.minCostTickets(days, costs);
         System.out.println(minCost);
+        Assertions.assertEquals(3040, minCost);
     }
     @Test
     void minCostTickets4() {
@@ -43,5 +49,49 @@ class DynamicProgrammingTest {
         int[] costs = {3,13,45};
         int minCost = DynamicProgramming.minCostTickets(days, costs);
         System.out.println(minCost);
+        Assertions.assertEquals(44, minCost);
+    }
+
+    @BeforeEach
+    void clearMap(){
+        DynamicProgramming.dp.clear();
+        DynamicProgramming.map.clear();
+        DynamicProgramming.stepsForSum.clear();
+    }
+
+    @Test
+    void coinChange1() {
+        int[] coins = {1,2,5};
+        int amount = 6;
+        int minNum = DynamicProgramming.coinChange(coins, amount);
+        System.out.println(minNum);
+        Assertions.assertEquals(2, minNum);
+    }
+
+    @Test
+    void coinChange2() {
+        int[] coins = {1, 2, 5};
+        int amount = 0;
+        int minNum = DynamicProgramming.coinChange(coins, amount);
+        System.out.println(minNum);
+        Assertions.assertEquals(0, minNum);
+    }
+
+    @Test
+    void coinChange3() {
+        int[] coins = {2};
+        int amount = 3;
+        int minNum = DynamicProgramming.coinChange(coins, amount);
+        System.out.println(minNum);
+        Assertions.assertEquals(-1, minNum);
+    }
+
+    @Test
+    void coinChange4(){
+        int[] coins = {1,2147483647};
+        int amount = 2;
+        int minNum = DynamicProgramming.coinChange(coins, amount);
+        System.out.println(minNum);
+        Assertions.assertEquals(2, minNum);
     }
 }
