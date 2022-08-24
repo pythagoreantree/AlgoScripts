@@ -24,7 +24,7 @@
     <name>AlgoScripts</name>
     <description>Algo Project</description>
     <properties>
-        <java.version>1.15</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>

@@ -1,6 +1,5 @@
 package com.maria;
 
-import com.sun.tools.javac.util.List;
 import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.ArrayList;

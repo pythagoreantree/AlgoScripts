@@ -87,4 +87,34 @@ class RecursionTest {
     void climbStairs() {
         System.out.println(Recursion.climbStairs(4));
     }
+
+    @Test
+    void mergeTwoLists1() {
+        ListNode l1 = Recursion.buildList(new int[]{1, 2, 2, 4});
+        ListNode l2 = Recursion.buildList(new int[]{2, 3, 5, 7});
+        ListNode head = Recursion.mergeTwoLists(l1, l2);
+        Recursion.printList(head);
+    }
+
+    @Test
+    void mergeTwoLists2() {
+        ListNode l1 = Recursion.buildList(new int[]{2, 3, 4, 7});
+        ListNode l2 = Recursion.buildList(new int[]{1, 1, 3});
+        ListNode head = Recursion.mergeTwoLists(l1, l2);
+        Recursion.printList(head);
+    }
+
+    @Test
+    void mergeTwoLists3() {
+        ListNode l1 = Recursion.buildList(new int[]{1, 2, 4});
+        ListNode l2 = Recursion.buildList(new int[]{1, 3, 4});
+        ListNode head = Recursion.mergeTwoLists(l1, l2);
+        Recursion.printList(head);
+    }
+
+    @Test
+    void kthGrammar() {
+        int num = Recursion.kthGrammarII(5, 8);
+        System.out.println(num);
+    }
 }

@@ -79,6 +79,11 @@ public class Recursion {
         return root;
     }
 
+
+    public static ListNode buildList(int[] arr) {
+        return arrayToList(arr);
+    }
+
     public static ListNode arrayToList(int[] arr) {
         if (arr.length == 0)
             return null;
@@ -272,5 +277,89 @@ public class Recursion {
         int levelCount = climb(level + 1, target) + climb(level + 2, target);
         dpCLimb.put(level, levelCount);
         return levelCount;
+    }
+
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 == null && list2 == null) return null;
+        else if (list1 == null) return list2;
+        else if (list2 == null) return list1;
+
+        if (list1.val > list2.val) {
+            return mergeTwoLists(list2, list1);
+        }
+        ListNode head = list1, pt1 = list1, parent = list1, pt2 = list2;
+
+        while (pt2 != null) {
+            while (pt1 != null && pt1.val <= pt2.val){
+                parent = pt1;
+                pt1 = pt1.next;
+            }
+            ListNode tmp = pt2;
+            pt2 = pt2.next;
+            tmp.next = pt1;
+            parent.next = tmp;
+            parent = tmp;
+        }
+        return head;
+    }
+
+    public static List<Integer> current = new ArrayList<>();
+    public static List<Integer> temporary = new ArrayList<>();
+    static {
+        current.add(0);
+    }
+    public static int kthGrammar(int n, int k) {
+        int j = 2;
+        while (j <= n) {
+            for (Integer symbol : current) {
+                switch (symbol) {
+                    case 0:
+                        temporary.add(0);
+                        temporary.add(1);
+                        break;
+                    case 1:
+                        temporary.add(1);
+                        temporary.add(0);
+                        break;
+                    default:
+                        throw new RuntimeException("Unknown symbol: " + symbol);
+                }
+            }
+            current.clear();
+            current.addAll(temporary);
+            temporary.clear();
+            j++;
+        }
+        System.out.println(current);
+        return current.get(k-1);
+    }
+
+    public static List<Integer> state = new ArrayList<>();
+    public static int kthGrammarII(int n, int k) {
+        if (k == 1) {
+            int curr = 0;
+            for (int i = state.size()-1; i >= 0; i--){
+                if (state.get(i) == 1){
+                    if (curr == 0)
+                        curr = 1;
+                    else
+                        curr = 0;
+                } else {
+                    if (curr == 0)
+                        curr = 0;
+                    else
+                        curr = 1;
+                }
+            }
+            return curr;
+        }
+
+        if (k % 2 == 0) {
+            state.add(1);
+            return kthGrammarII(n-1, k/2);
+        } else {
+            state.add(0);
+            return kthGrammarII(n-1, (k+1)/2);
+        }
     }
 }
