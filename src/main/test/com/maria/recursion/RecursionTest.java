@@ -1,7 +1,10 @@
 package com.maria.recursion;
 
+import com.maria.trees.TreeNode;
+import com.maria.trees.binarytree.BinaryTree;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.maria.recursion.Recursion.*;
@@ -116,5 +119,19 @@ class RecursionTest {
     void kthGrammar() {
         int num = Recursion.kthGrammarII(5, 8);
         System.out.println(num);
+    }
+
+    @Test
+    void uniqueBST() {
+        List<List<Integer>> result = Recursion.uniqueBST(3);
+        for (List l: result) {
+            System.out.println(l);
+        }
+    }
+
+    @Test
+    void generateTrees() {
+        List<TreeNode> result = Recursion.generateTrees(3);
+        System.out.println("for debug...");
     }
 }

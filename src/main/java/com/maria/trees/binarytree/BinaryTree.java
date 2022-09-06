@@ -635,6 +635,12 @@ public class BinaryTree {
         return (leftLCA != null) ? leftLCA : rightLCA;
     }
 
+    public static String preOrderTraversalString(TreeNode node) {
+        res.clear();
+        List<Integer> list = preorderTraversal(node);
+        return list != null ? list.toString() : "";
+    }
+
     /*public static List<Integer> preorderTraversal2(TreeNode root) {
 
         List<Integer> pre = new LinkedList<Integer>();

@@ -1,5 +1,8 @@
 package com.maria.recursion;
 
+import com.maria.trees.TreeNode;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -361,5 +364,112 @@ public class Recursion {
             state.add(0);
             return kthGrammarII(n-1, (k+1)/2);
         }
+    }
+
+    public static List<List<Integer>> uniqueBST(int n) {
+//        List<List<Integer>> result = f1(1, n);
+        return f1(1, n);
+    }
+
+    private static List<List<Integer>> f1(int start, int end) {
+        if (start == end) {
+            List<Integer> internal = new ArrayList<>();
+            List<List<Integer>> external = new ArrayList<>();
+            internal.add(start);
+            external.add(internal);
+            return external;
+        }
+
+        List<List<Integer>> currList = new ArrayList<>();
+        for (int j = start; j <= end; j++) {
+            int curr = j;
+//            if (start == 0 && end == 3 && curr == 2)
+//                System.out.println("Debug Point!");
+
+            List<List<Integer>> left = null;
+            if (j != start) {
+                left = f1(start, j - 1);
+            }
+
+            List<List<Integer>> right = null;
+            if (j != end) {
+                right = f1(j + 1, end);
+            }
+
+            if (left == null && right != null && !right.isEmpty()) {
+                for (List list: right) {
+                    list.add(0, curr);
+                    list.add(1, null);
+                    currList.add(list);
+                }
+            } else if (right == null && left != null && !left.isEmpty()) {
+                for (List list: left) {
+                    list.add(0, curr);
+                    list.add(2, null);
+                    currList.add(list);
+                }
+            } else if (left != null && right != null) {
+                for (int i1 = 0; i1 < left.size(); i1++) {
+                    for (int j1 = 0; j1 < right.size(); j1++) {
+                        List res = new ArrayList();
+                        res.add(curr);
+                        res.addAll(left.get(i1));
+                        res.addAll(right.get(j1));
+                        currList.add(res);
+                    }
+                }
+            }
+        }
+        return currList;
+    }
+
+    public static List<TreeNode> generateTrees(int n) {
+        return getTrees(1, n);
+    }
+
+    private static List<TreeNode> getTrees(int start, int end) {
+        if (start == end) {
+            List<TreeNode> l = new ArrayList<>();
+            l.add(new TreeNode(start));
+            return l;
+        }
+
+        List<TreeNode> levelList = new ArrayList<>();
+        for (int j = start; j <= end; j++) {
+
+            List<TreeNode> left = null;
+            if (j != start) {
+                left = getTrees(start, j - 1);
+            }
+
+            List<TreeNode> right = null;
+            if (j != end) {
+                right = getTrees(j + 1, end);
+            }
+
+            if (left == null && right != null && !right.isEmpty()) {
+                for (int i = 0; i < right.size(); i++) {
+                    TreeNode currNode = new TreeNode(j);
+                    currNode.right = right.get(i);
+                    levelList.add(currNode);
+                }
+            } else if (right == null && left != null && !left.isEmpty()) {
+                for (int i = 0; i < left.size(); i++) {
+                    TreeNode currNode = new TreeNode(j);
+                    currNode.left = left.get(i);
+                    levelList.add(currNode);
+                }
+            } else if (left != null && right != null) {
+                for (int i1 = 0; i1 < left.size(); i1++) {
+                    for (int j1 = 0; j1 < right.size(); j1++) {
+                        TreeNode currNode = new TreeNode(j);
+                        currNode.left = left.get(i1);
+                        currNode.right = right.get(j1);
+                        levelList.add(currNode);
+                    }
+                }
+            }
+        }
+        return levelList;
     }
 }
