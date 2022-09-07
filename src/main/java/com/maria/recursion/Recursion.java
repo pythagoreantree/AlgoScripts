@@ -290,20 +290,41 @@ public class Recursion {
         if (list1.val > list2.val) {
             return mergeTwoLists(list2, list1);
         }
-        ListNode head = list1, pt1 = list1, parent = list1, pt2 = list2;
+        ListNode head = list1, parent = list1;
 
-        while (pt2 != null) {
-            while (pt1 != null && pt1.val <= pt2.val){
-                parent = pt1;
-                pt1 = pt1.next;
+        while (list2 != null) {
+            while (list1 != null && list1.val <= list2.val){
+                parent = list1;
+                list1 = list1.next;
             }
-            ListNode tmp = pt2;
-            pt2 = pt2.next;
-            tmp.next = pt1;
+            ListNode tmp = list2;
+            list2 = list2.next;
+            tmp.next = list1;
             parent.next = tmp;
             parent = tmp;
         }
         return head;
+    }
+
+    public static ListNode mergeTwoListsII(ListNode list1, ListNode list2) {
+        if(list1 == null){
+            return list2;
+        }
+
+        if (list2 == null) {
+            return list1;
+        }
+
+        ListNode merge;
+        if (list1.val <= list2.val) {
+            merge = list1;
+            merge.next = mergeTwoListsII(list1.next, list2);
+        } else {
+            merge = list2;
+            merge.next = mergeTwoListsII(list1, list2.next);
+        }
+
+        return merge;
     }
 
     public static List<Integer> current = new ArrayList<>();
@@ -363,6 +384,64 @@ public class Recursion {
         } else {
             state.add(0);
             return kthGrammarII(n-1, (k+1)/2);
+        }
+    }
+
+    /* Тут что-то на эльфийском */
+    public int kthGrammarIII(int n, int k) {
+        if(k == 1) return 0;
+        else {
+            int last = kthGrammarIII(n - 1, (k + 1) / 2);
+            if(last == 0) return (~k & 1);
+            else return k & 1;
+        }
+    }
+
+    public int kthGrammarIV(int N, int K) {
+        return Integer.bitCount(K - 1) % 2;
+    }
+
+    public int kthGrammarV(int n, int k) {
+        int ans=findK(n,k);
+        // System.out.println(ans);
+        return ans;
+    }
+
+    public int kthGrammarVI(int n, int k) {
+        if(n == 1){
+            return 0;
+        }
+        if(k <= (int)Math.pow(2, n-2))
+            return kthGrammarVI(n-1, k);
+        else
+            return 1 - kthGrammarVI(n-1, k - (int)Math.pow(2, n - 2));
+    }
+
+    private static int findK(int n, int k) {
+        if(n==1||k==1)
+            return 0;
+        int mid= (int) Math.pow(2,n-1)/2;
+        //we divide the array into 2 as the value of thr first half is same as that of n-1 hence
+        //and the second half of n is complement of n-1 hence we have to take 2 cases for the kyh value..
+        if(k<=mid)
+            return findK(n-1,k);
+        else
+            return findK(n-1,k-mid)==0 ? 1 : 0;
+    }
+
+    public int kthGrammarVII(int n, int k) {
+        if(n == 1) {
+            return 0;
+        }
+
+        if(n == 2) {
+            return k == 1 ? 0 : 1;
+        }
+
+        if (k % 2 == 1) {
+            return kthGrammarVII(n-1, (k+1)/2);
+        } else {
+            return kthGrammarVII(n-1, k/2) == 0 ? 1 : 0;
         }
     }
 
@@ -471,5 +550,29 @@ public class Recursion {
             }
         }
         return levelList;
+    }
+
+    public static List<TreeNode> solve(int start, int end){
+        List<TreeNode> res = new ArrayList<>();
+        if(start > end){
+            res.add(null);
+            return res;
+        }
+        //make combination of left and right subtree
+        for(int i = start; i <= end; i++){
+            List<TreeNode> left = solve(start, i - 1);
+            List<TreeNode> right = solve(i + 1, end);
+            //see we didn't iterate for i, that will act as root
+            for(TreeNode l : left){
+                for(TreeNode r : right){
+                    TreeNode root = new TreeNode(i);
+                    root.left = l;
+                    root.right = r;
+                    res.add(root);
+                }
+            }
+        }
+        return res;
+
     }
 }

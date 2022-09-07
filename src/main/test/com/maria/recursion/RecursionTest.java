@@ -116,6 +116,14 @@ class RecursionTest {
     }
 
     @Test
+    void mergeTwoLists4() {
+        ListNode l1 = Recursion.buildList(new int[]{1, 2, 5});
+        ListNode l2 = Recursion.buildList(new int[]{1, 2, 3, 4, 5});
+        ListNode head = Recursion.mergeTwoListsII(l1, l2);
+        Recursion.printList(head);
+    }
+
+    @Test
     void kthGrammar() {
         int num = Recursion.kthGrammarII(5, 8);
         System.out.println(num);
