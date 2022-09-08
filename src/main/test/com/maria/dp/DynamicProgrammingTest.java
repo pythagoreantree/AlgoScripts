@@ -114,4 +114,13 @@ class DynamicProgrammingTest {
         System.out.println(minNum);
         //        Assertions.assertEquals(2, minNum);
     }
+
+    @Test
+    void minCostTicketsII() {
+        int[] days = {1, 4, 6, 7, 8, 20};
+        int[] costs = {2, 7, 15};
+        int minCost = DynamicProgramming.minCostTicketsII(days, costs);
+        System.out.println(minCost);
+//        Assertions.assertEquals(11, minCost);
+    }
 }

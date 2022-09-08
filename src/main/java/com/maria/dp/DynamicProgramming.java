@@ -40,6 +40,40 @@ public class DynamicProgramming {
         return dp.get(index);
     }
 
+    /**
+     * Min Cost Tickets II
+     */
+    public static int minCostTicketsII(int[] days, int[] costs) {
+        int[][] tickets = new int[][] {
+                {1, costs[0]},
+                {7, costs[1]},
+                {30, costs[2]}
+        };
+
+        Map<Integer, Integer> dp2 = new HashMap<>();
+
+        int ind = days.length - 1;
+        while (ind >= 0) {
+
+            for (int i = 0; i < 3; i++) {
+                int j = ind;
+                while (j < days.length && days[j] < days[ind] + tickets[i][0]){
+                    j++;
+                }
+                int x = (j > (days.length - 1))? 0: dp2.get(days[j]);
+                int calcCost = tickets[i][1] + x;
+                if (!dp2.containsKey(days[ind])) {
+                    dp2.put(days[ind], calcCost);
+                } else {
+                    dp2.put(days[ind], Math.min(dp2.get(days[ind]), calcCost));
+                }
+
+            }
+            ind--;
+        }
+        return dp2.get(days[0]);
+    }
+
     /*public static int countCost1(int[] days, int[] costs, int index, int totalCost) {
         totalCost += costs[0];
         int j = index + 1;
