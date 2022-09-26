@@ -4,6 +4,7 @@ import com.maria.binarysearch.TPrinter;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,24 @@ class AnangramsTaskTest {
     void removeAnagrams() {
         String[] anagrams = {"code", "doce", "ecod", "framer", "fmera", "cdeo"};
         List<String> result = AnangramsTask.removeAnagrams(anagrams);
+        TPrinter.print(result);
+    }
+
+    @Test
+    void removeAtIndex() {
+        String[] arr = {"a", "b", "c", "d", "e", "f"};
+        AnangramsTask.removeAtIndex(arr, 0);
+        System.out.println(Arrays.asList(arr));
+    }
+
+    @Test
+    void removeAnagramsII() {
+        String[] anagrams = {"abba","baba","bbaa","cd","cd"};
+        List<String> result = AnangramsTask.removeAnagramsII(anagrams);
+        TPrinter.print(result);
+
+        String[] arr = {"a", "b", "c", "d", "e"};
+        result = AnangramsTask.removeAnagramsII(arr);
         TPrinter.print(result);
     }
 }

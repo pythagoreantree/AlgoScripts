@@ -112,7 +112,7 @@ public class AnangramsTask {
         if (s == null || s.isEmpty()) return s;
         char[] arr = s.toCharArray();
         Arrays.sort(arr);
-        return Arrays.toString(arr);
+        return new String(arr);
     }
 
     public static List<String> removeAnagrams(String[] arr) {
@@ -128,6 +128,35 @@ public class AnangramsTask {
         }
         Collections.sort(ans);
         return ans;
+    }
+
+    public static List<String> removeAnagramsII(String[] words) {
+        List<String> list = new ArrayList<>();
+
+        list.add(words[0]);
+        for (int i = 1; i < words.length ; i++) {
+            String one = getSorted(words[i - 1]);
+            String two = getSorted(words[i]);
+            if (!one.equals(two)) {
+                list.add(words[i]);
+            }
+        }
+
+        return list;
+    }
+
+    public static void removeAtIndex(String[] arr, int index) {
+        if (index == arr.length - 1) {
+            arr[index] = null;
+        }
+        int i = index;
+        while (i + 1 < arr.length) {
+            arr[i] = arr[i + 1];
+            if (i + 1 == arr.length - 1) {
+                arr[i + 1] = null;
+            }
+            i++;
+        }
     }
 
 }
