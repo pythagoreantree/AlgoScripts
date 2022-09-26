@@ -228,6 +228,13 @@ public class BinaryTree {
         root.left.right.right.left.right = new TreeNode(12);
         return root;
     }
+
+    public static TreeNode constructTree8(){
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(3);
+        return root;
+    }
     public static boolean isSymmetric(TreeNode root) {
         boolean isSymmetric = true;
 
