@@ -30,6 +30,9 @@ public class DynamicProgramming {
         return dp.get(m + "," + n);
     }
 
+    /*
+    * Tabulation.
+    * */
     public static long gridTravelerTabulation(int m, int n) {
         long[][] dp = new long[m + 1][n + 1];
         for (int i = 0; i < m + 1; i++) {
@@ -54,4 +57,21 @@ public class DynamicProgramming {
             System.out.println("");
         }
     }
+
+    /*
+    * Calculate n-th number of the Fibonacci sequence.
+    *
+    * Tabulation.
+    * */
+    public static long fibTabulation(int n) {
+        long[] dp = new long[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 0; i < n + 1; i++) {
+            if (i + 1 < n + 1) dp[i + 1] += dp[i];
+            if (i + 2 < n + 1) dp[i + 2] += dp[i];
+        }
+        return dp[n];
+    }
+
 }

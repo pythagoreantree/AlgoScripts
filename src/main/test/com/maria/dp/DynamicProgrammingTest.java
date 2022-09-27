@@ -32,4 +32,16 @@ class DynamicProgrammingTest {
         long ans = DynamicProgramming.gridTravelerTabulation(18, 18);
         System.out.println(ans);
     }
+
+    @Test
+    void fibTabulation() {
+        long ans = DynamicProgramming.fibTabulation(6);
+        System.out.println(ans);
+
+        ans = DynamicProgramming.fibTabulation(8);
+        System.out.println(ans);
+
+        ans = DynamicProgramming.fibTabulation(50);
+        System.out.println(ans);
+    }
 }
