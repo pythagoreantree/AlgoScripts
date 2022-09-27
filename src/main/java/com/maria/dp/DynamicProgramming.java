@@ -139,7 +139,9 @@ public class DynamicProgramming {
     * */
     public static Map<Integer, List<Integer>> dp4 = new HashMap<>();
     public static List<Integer> bestSum(int[] nums, int targetSum) {
-        if (dp4.containsKey(targetSum)) return dp4.get(targetSum);
+        if (dp4.containsKey(targetSum)) {
+            return dp4.get(targetSum);
+        }
         if (targetSum == 0) {
             return new ArrayList<>();
         }
@@ -148,11 +150,12 @@ public class DynamicProgramming {
         List<Integer> minList = null;
         for (int num: nums) {
             int remainder = targetSum - num;
-            List<Integer> path = bestSum(nums, remainder);
+            List<Integer> prevPath = bestSum(nums, remainder);
+            List<Integer> path = prevPath != null ? new ArrayList<>(prevPath) : null;
             if (path != null) {
                 path.add(num);
                 if (minList == null || path.size() < minList.size()) {
-                    minList = path;
+                    minList = new ArrayList<>(path);
                 }
             }
         }

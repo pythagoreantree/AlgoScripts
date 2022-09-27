@@ -77,6 +77,8 @@ class DynamicProgrammingTest {
 
     @Test
     void bestSum() {
+        DynamicProgramming.dp4.clear();
+
         int[] nums1 = {5, 4, 3, 7};
         int targetSum = 7;
         System.out.println(DynamicProgramming.bestSum(nums1, targetSum));
