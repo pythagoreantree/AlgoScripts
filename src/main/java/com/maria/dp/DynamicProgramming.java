@@ -1,8 +1,6 @@
 package com.maria.dp;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class DynamicProgramming {
 
@@ -72,6 +70,69 @@ public class DynamicProgramming {
             if (i + 2 < n + 1) dp[i + 2] += dp[i];
         }
         return dp[n];
+    }
+
+    /*
+    * The function should return a boolean indicating whether or not it is possible
+    * to generate the targetSum using numbers from the array.
+    *
+    * You may use an element of the array as many times as needed.
+    *
+    * All nums and non-negative.
+    *
+    * Memoization.
+    * */
+    public static Map<Integer, Boolean> dp2 = new HashMap<>();
+    public static boolean canSum(int[] nums, int targetSum) {
+        if (dp2.containsKey(targetSum)) return dp2.get(targetSum);
+        if (targetSum == 0) return true;
+        if (targetSum < 0) return false;
+
+        for (int num: nums) {
+            int remainder = targetSum - num;
+            boolean hasPath = canSum(nums, remainder);
+            if (hasPath) {
+                return true;
+            }
+        }
+        dp2.put(targetSum, false);
+        return false;
+    }
+
+    /*
+    * The function should return an array containing any combination of elements
+    * that add up to exactly the targetSum. If there is no combination that adds up to the targetSum
+    * then return null.
+    *
+    * If there are multiple combinations, you may return any signle one.
+    *
+    * Memoization.
+    * */
+    public static Map<Integer, List<Integer>> dp3 = new HashMap<>();
+    public static List<Integer> howSum(int[] nums, int targetSum) {
+        if (dp3.containsKey(targetSum)) return dp3.get(targetSum);
+        if (targetSum == 0) {
+            return new ArrayList<>();
+        }
+        if (targetSum < 0) return null;
+
+        for (int num: nums) {
+            int remainder = targetSum - num;
+            List<Integer> path = howSum(nums, remainder);
+            if (path != null) {
+                path.add(num);
+                return path;
+            }
+        }
+        dp3.put(targetSum, null);
+        return null;
+    }
+
+    /*
+    *
+    * */
+    public static void bestSum(int[] nums, int targetSum) {
+
     }
 
 }

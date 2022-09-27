@@ -2,6 +2,8 @@ package com.maria.dp;
 
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
+
 class DynamicProgrammingTest {
 
     @Test
@@ -43,5 +45,33 @@ class DynamicProgrammingTest {
 
         ans = DynamicProgramming.fibTabulation(50);
         System.out.println(ans);
+    }
+
+    @Test
+    void canSum() {
+        int[] nums1 = {5, 4, 3, 7};
+        int targetSum = 7;
+        System.out.println(DynamicProgramming.canSum(nums1, targetSum));
+
+        int[] nums2 = {2, 4};
+        System.out.println(DynamicProgramming.canSum(nums2, targetSum));
+
+        int[] nums3 = {7, 10};
+        int targetSum2 = 300;
+        System.out.println(DynamicProgramming.canSum(nums3, targetSum2));
+    }
+
+    @Test
+    void howSum() {
+        int[] nums1 = {5, 4, 3, 7};
+        int targetSum = 7;
+        System.out.println(DynamicProgramming.howSum(nums1, targetSum));
+
+        int[] nums2 = {2, 4};
+        System.out.println(DynamicProgramming.howSum(nums2, targetSum));
+
+        int[] nums3 = {7, 14};
+        int targetSum2 = 300;
+        System.out.println(DynamicProgramming.howSum(nums3, targetSum2));
     }
 }
