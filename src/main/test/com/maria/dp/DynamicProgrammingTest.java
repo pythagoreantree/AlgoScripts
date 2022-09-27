@@ -74,4 +74,29 @@ class DynamicProgrammingTest {
         int targetSum2 = 300;
         System.out.println(DynamicProgramming.howSum(nums3, targetSum2));
     }
+
+    @Test
+    void bestSum() {
+        int[] nums1 = {5, 4, 3, 7};
+        int targetSum = 7;
+        System.out.println(DynamicProgramming.bestSum(nums1, targetSum));
+
+        DynamicProgramming.dp4.clear();
+
+        int[] nums2 = {2, 3, 5};
+        int targetSum2 = 8;
+        System.out.println(DynamicProgramming.bestSum(nums2, targetSum2));
+
+        DynamicProgramming.dp4.clear();
+
+        int[] nums3 = {1, 4, 5};
+        int targetSum3 = 8;
+        System.out.println(DynamicProgramming.bestSum(nums3, targetSum3));
+
+        DynamicProgramming.dp4.clear();
+
+        int[] nums4 = {1, 2, 5, 25};
+        int targetSum4 = 100;
+        System.out.println(DynamicProgramming.bestSum(nums4, targetSum4));
+    }
 }

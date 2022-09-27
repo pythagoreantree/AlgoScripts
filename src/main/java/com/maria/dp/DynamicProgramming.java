@@ -129,10 +129,35 @@ public class DynamicProgramming {
     }
 
     /*
+    * The Function should return an array containing the shortest
+    * combination of numbers that add up to exactly the targetSum.
+    *
+    * If there is a tie for the shortest combination, you may return any
+    * of the shortest.
+    *
     *
     * */
-    public static void bestSum(int[] nums, int targetSum) {
+    public static Map<Integer, List<Integer>> dp4 = new HashMap<>();
+    public static List<Integer> bestSum(int[] nums, int targetSum) {
+        if (dp4.containsKey(targetSum)) return dp4.get(targetSum);
+        if (targetSum == 0) {
+            return new ArrayList<>();
+        }
+        if (targetSum < 0) return null;
 
+        List<Integer> minList = null;
+        for (int num: nums) {
+            int remainder = targetSum - num;
+            List<Integer> path = bestSum(nums, remainder);
+            if (path != null) {
+                path.add(num);
+                if (minList == null || path.size() < minList.size()) {
+                    minList = path;
+                }
+            }
+        }
+        dp4.put(targetSum, minList);
+        return dp4.get(targetSum);
     }
 
 }
