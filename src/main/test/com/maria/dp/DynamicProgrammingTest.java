@@ -103,13 +103,6 @@ class DynamicProgrammingTest {
     }
 
     @Test
-    void countSumCombinations() {
-        int[] nums1 = {1, 2, 5};
-        int targetSum1 = 5;
-        System.out.println(DynamicProgramming.countSumCombinations(nums1, targetSum1));
-    }
-
-    @Test
     void canSumTabulation() {
         int[] nums1 = {5, 4, 3, 7};
         int targetSum1 = 7;
