@@ -101,4 +101,60 @@ class DynamicProgrammingTest {
         int targetSum4 = 100;
         System.out.println(DynamicProgramming.bestSum(nums4, targetSum4));
     }
+
+    @Test
+    void countSumCombinations() {
+        int[] nums1 = {1, 2, 5};
+        int targetSum1 = 5;
+        System.out.println(DynamicProgramming.countSumCombinations(nums1, targetSum1));
+    }
+
+    @Test
+    void canSumTabulation() {
+        int[] nums1 = {5, 4, 3, 7};
+        int targetSum1 = 7;
+        System.out.println(DynamicProgramming.canSumTabulation(nums1, targetSum1));
+
+        int[] nums2 = {2, 4};
+        int targetSum2 = 7;
+        System.out.println(DynamicProgramming.canSumTabulation(nums2, targetSum2));
+
+        int[] nums3 = {7, 10};
+        int targetSum3 = 300;
+        System.out.println(DynamicProgramming.canSumTabulation(nums3, targetSum3));
+    }
+
+    @Test
+    void howSumTabulation() {
+        int[] nums1 = {5, 4, 3, 7};
+        int targetSum1 = 7;
+        System.out.println(DynamicProgramming.howSumTabulation(nums1, targetSum1));
+
+        int[] nums2 = {2, 4};
+        int targetSum2 = 7;
+        System.out.println(DynamicProgramming.howSumTabulation(nums2, targetSum2));
+
+        int[] nums3 = {7, 10};
+        int targetSum3 = 300;
+        System.out.println(DynamicProgramming.howSumTabulation(nums3, targetSum3));
+    }
+
+    @Test
+    void bestSumTabulation() {
+        int[] nums1 = {5, 4, 3, 7};
+        int targetSum1 = 7;
+        System.out.println(DynamicProgramming.bestSumTabulation(nums1, targetSum1));
+
+        int[] nums2 = {2, 3, 5};
+        int targetSum2 = 8;
+        System.out.println(DynamicProgramming.bestSumTabulation(nums2, targetSum2));
+
+        int[] nums3 = {1, 4, 5};
+        int targetSum3 = 8;
+        System.out.println(DynamicProgramming.bestSumTabulation(nums3, targetSum3));
+
+        int[] nums4 = {1, 2, 5, 25};
+        int targetSum4 = 100;
+        System.out.println(DynamicProgramming.bestSumTabulation(nums4, targetSum4));
+    }
 }

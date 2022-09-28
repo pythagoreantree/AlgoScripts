@@ -163,4 +163,104 @@ public class DynamicProgramming {
         return dp4.get(targetSum);
     }
 
+    /*
+    * You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+    *
+    * Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.
+    *
+    * You may assume that you have an infinite number of each kind of coin.
+    *
+    * The answer is guaranteed to fit into a signed 32-bit integer.
+    *
+    * Memoization.
+    * */
+    public static int countSumCombinations(int[] nums, int targetSum) {
+        if (targetSum == 0) return 1;
+        if (targetSum < 0) return 0;
+
+        int combinations = 0;
+        for (int num: nums) {
+            int remainder = targetSum - num;
+            combinations += countSumCombinations(nums, remainder);
+        }
+        return combinations;
+    }
+
+    /*
+    * canSum task.
+    *
+    * Tabulation.
+    * */
+    public static boolean canSumTabulation(int[] nums, int targetSum) {
+        boolean[] dp = new boolean[targetSum + 1];
+        Arrays.fill(dp, false);
+        dp[0] = true;
+
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] == true) {
+                for (int j = 0; j < nums.length; j++) {
+                    if (i + nums[j] < dp.length) dp[i + nums[j]] = true;
+                }
+            }
+        }
+
+        return dp[targetSum];
+    }
+
+    /*
+     * howSum task.
+     *
+     * Tabulation.
+     * */
+    public static List<Integer> howSumTabulation(int[] nums, int targetSum) {
+        List<List<Integer>> dp = new ArrayList<>();
+        for (int i = 0; i < targetSum + 1; i++) {
+            dp.add(null);
+        }
+        dp.set(0, new ArrayList<>());
+//        System.out.println(dp);
+
+        for (int i = 0; i < dp.size(); i++) {
+            for (int j = 0; j < nums.length; j++) {
+                int index = i + nums[j];
+                if (index < targetSum + 1 && dp.get(i) != null) {
+                    List<Integer> currentList = new ArrayList<>(dp.get(i));
+                    currentList.add(nums[j]);
+                    dp.set(i + nums[j], currentList);
+                }
+            }
+        }
+
+        return dp.get(targetSum);
+    }
+
+    /*
+     * bestSum task.
+     *
+     * Tabulation.
+     * */
+    public static List<Integer> bestSumTabulation(int[] nums, int targetSum) {
+        List<List<Integer>> dp = new ArrayList<>();
+        for (int i = 0; i < targetSum + 1; i++) {
+            dp.add(null);
+        }
+        dp.set(0, new ArrayList<>());
+
+        for (int i = 0; i < dp.size(); i++) {
+            if (dp.get(i) != null) {
+                for (int j = 0; j < nums.length; j++) {
+                    int index = i + nums[j];
+                    if (index < targetSum + 1) {
+                        List<Integer> currentList = new ArrayList<>(dp.get(i));
+                        currentList.add(nums[j]);
+                        if (dp.get(index) == null || currentList.size() < dp.get(index).size()) {
+                            dp.set(i + nums[j], currentList);
+                        }
+                    }
+                }
+            }
+        }
+
+        return dp.get(targetSum);
+    }
 }
