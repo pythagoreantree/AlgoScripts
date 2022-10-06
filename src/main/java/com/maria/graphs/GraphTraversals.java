@@ -20,7 +20,7 @@ public class GraphTraversals {
     }
 
     /*
-    * DFS for fully connected Graph.
+    * DFS for a fully connected Graph.
     * */
     public static void dfs(Map<Integer, List<Integer>> graph, Integer node, Set<Integer> visited) {
         if (visited.contains(node)) return;
@@ -61,8 +61,39 @@ public class GraphTraversals {
         return count;
     }
 
-    public static void bfs() {
+    /*
+     * BFS version for a fully connected Graph.
+     * */
+    public static void bfs(Map<Integer, List<Integer>> graph, Integer node, Set<Integer> visited) {
 
+        Deque<Integer> queue = new LinkedList<>();
+        queue.addLast(node);
+
+        while(!queue.isEmpty()) {
+            Integer current = queue.poll();
+
+            if (visited.contains(current)) continue;
+            visited.add(current);
+
+            System.out.print(current + " ");
+
+            List<Integer> neighbors = graph.get(current);
+            for (Integer neighbor: neighbors) {
+                queue.addLast(neighbor);
+            }
+        }
+    }
+
+    /*
+     * BFS version of not fully connected Graph.
+     * */
+    public static void bfsNFCG(Map<Integer, List<Integer>> graph) {
+        Set<Integer> visited = new HashSet<>();
+        for (Integer node: graph.keySet()) {
+            if (!visited.contains(node)) {
+                bfs(graph, node, visited);
+            }
+        }
     }
 
 }

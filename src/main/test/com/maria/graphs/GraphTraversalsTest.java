@@ -38,6 +38,11 @@ class GraphTraversalsTest {
 
     @Test
     void bfs() {
+        GraphTraversals.bfs(graph, 1, new HashSet<>());
     }
 
+    @Test
+    void bfsNFCG() {
+        GraphTraversals.bfsNFCG(graph);
+    }
 }
