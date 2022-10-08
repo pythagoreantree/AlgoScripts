@@ -10,6 +10,7 @@ class GraphPathsTest {
 
     public static Map<Integer, List<Integer>> graph = new HashMap<>();
     public static List<List<Integer>> graphInPairs = new ArrayList<>();
+    public static List<List<Integer>> graphInPairs2 = new ArrayList<>();
 
     static {
         graph.put(1, List.of(2));
@@ -28,6 +29,13 @@ class GraphPathsTest {
         graphInPairs.add(List.of(5, 1));
         graphInPairs.add(List.of(6, 7));
 
+        graphInPairs2.add(List.of(1, 2));
+        graphInPairs2.add(List.of(2, 3));
+        graphInPairs2.add(List.of(3, 4));
+        graphInPairs2.add(List.of(1, 5));
+        graphInPairs2.add(List.of(5, 4));
+//        graphInPairs2.add(List.of(6, 7));
+//        graphInPairs2.add(List.of(7, 4));
     }
 
     @Test
@@ -51,5 +59,13 @@ class GraphPathsTest {
     void pairsToAdvListDirected() {
         Map<Integer, List<Integer>> resultGraph = GraphPaths.pairsToAdvListDirected(graphInPairs);
         System.out.println(resultGraph);
+    }
+
+    @Test
+    void shortestPathBFS() {
+        Map<Integer, List<Integer>> resultGraph = GraphPaths.pairsToAdvListDirected(graphInPairs2);
+        System.out.println(resultGraph);
+        int num = GraphPaths.shortestPathBFS(resultGraph, 1, 4);
+        System.out.println(num);
     }
 }

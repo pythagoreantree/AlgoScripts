@@ -66,4 +66,27 @@ public class GraphPaths {
         }
         return graph;
     }
+
+    /*
+    * Length of shortest path.
+    * */
+    public static int shortestPathBFS(Map<Integer, List<Integer>> graph, Integer src, Integer dst) {
+        Set<Integer> visited = new HashSet<>();
+        Deque<List<Integer>> queue = new LinkedList<>();
+        queue.addLast(List.of(src, 0));
+
+        while(!queue.isEmpty()) {
+            List<Integer> elem = queue.pollFirst();
+            Integer node = elem.get(0);
+            if (node == dst) return elem.get(1);
+            List<Integer> neighbors = graph.get(node);
+            for(Integer neighbor: neighbors) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    queue.addLast(List.of(neighbor, elem.get(1) + 1));
+                }
+            }
+        }
+        return -1;
+    }
 }
