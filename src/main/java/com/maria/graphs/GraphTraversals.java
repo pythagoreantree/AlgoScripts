@@ -61,6 +61,52 @@ public class GraphTraversals {
         return count;
     }
 
+    public static int dfsAdvanced(Map<Integer, List<Integer>> graph, Integer node, Set<Integer> visited) {
+        if (visited.contains(node)) return 0;
+        visited.add(node);
+
+        int currSize = 1;
+
+        List<Integer> neighbors = graph.get(node);
+
+        for (Integer neighbor: neighbors) {
+            currSize += dfsAdvanced(graph, neighbor, visited);
+        }
+
+        return currSize;
+    }
+
+    /*
+    * Largest connected component.
+    * */
+    public static int largestConnectedComponent(Map<Integer, List<Integer>> graph) {
+        Set<Integer> visited = new HashSet<>();
+        int maxSize = -1;
+        for (Integer key: graph.keySet()) {
+            if (!visited.contains(key)) {
+                int currentSize = dfsAdvanced(graph, key, visited);
+                maxSize = Math.max(currentSize, maxSize);
+            }
+        }
+        return maxSize;
+    }
+
+    /*
+    * Smallest connected component.
+    * */
+    public static int smallestConnectedComponent(Map<Integer, List<Integer>> graph) {
+        Set<Integer> visited = new HashSet<>();
+        int minSize = graph.size() + 1;
+        for (Integer key: graph.keySet()) {
+            if (!visited.contains(key)) {
+                int currentSize = dfsAdvanced(graph, key, visited);
+                minSize = Math.min(currentSize, minSize);
+            }
+        }
+        return minSize;
+    }
+
+
     /*
      * BFS version for a fully connected Graph.
      * */

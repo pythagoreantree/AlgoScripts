@@ -16,8 +16,8 @@ class GraphTraversalsTest {
         graph.put(4, List.of(2, 3, 6));
         graph.put(5, List.of(3));
         graph.put(6, List.of(3, 4));
-        graph.put(7, new ArrayList<>());
-        graph.put(8, new ArrayList<>());
+        graph.put(7, List.of(8));
+        graph.put(8, List.of(7));
 
         graph2.put(1, List.of(2, 3));
         graph2.put(2, List.of(3));
@@ -53,5 +53,14 @@ class GraphTraversalsTest {
     @Test
     void bfsNFCG() {
         GraphTraversals.bfsNFCG(graph);
+    }
+
+    @Test
+    void largestConnectedComponent() {
+        int size = GraphTraversals.largestConnectedComponent(graph);
+        System.out.println(size);
+
+        int msize = GraphTraversals.smallestConnectedComponent(graph);
+        System.out.println(msize);
     }
 }
