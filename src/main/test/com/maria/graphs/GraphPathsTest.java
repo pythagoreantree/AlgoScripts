@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GraphPathsTest {
 
     public static Map<Integer, List<Integer>> graph = new HashMap<>();
-    public static Map<Integer, List<Integer>> graph2 = new HashMap<>();
+    public static List<List<Integer>> graphInPairs = new ArrayList<>();
 
     static {
         graph.put(1, List.of(2));
@@ -21,13 +21,13 @@ class GraphPathsTest {
         graph.put(7, List.of(8));
         graph.put(8, List.of(7));
 
-        graph2.put(1, List.of(2, 3));
-        graph2.put(2, List.of(3));
-        graph2.put(3, List.of(4, 5, 6));
-        graph2.put(4, List.of(2, 6));
-        graph2.put(5, new ArrayList<>());
-        graph2.put(6, new ArrayList<>());
-        graph2.put(7, new ArrayList<>());
+        graphInPairs.add(List.of(1, 2));
+        graphInPairs.add(List.of(3, 1));
+        graphInPairs.add(List.of(4, 3));
+        graphInPairs.add(List.of(3, 5));
+        graphInPairs.add(List.of(5, 1));
+        graphInPairs.add(List.of(6, 7));
+
     }
 
     @Test
@@ -39,5 +39,17 @@ class GraphPathsTest {
         boolean hasPath2 = GraphPaths.hasPath(graph, 3, 8, new HashSet<>());
         System.out.println(hasPath2);
         assertFalse(hasPath2);
+    }
+
+    @Test
+    void pairsToAdvList() {
+        Map<Integer, List<Integer>> resultGraph = GraphPaths.pairsToAdvListUndirected(graphInPairs);
+        System.out.println(resultGraph);
+    }
+
+    @Test
+    void pairsToAdvListDirected() {
+        Map<Integer, List<Integer>> resultGraph = GraphPaths.pairsToAdvListDirected(graphInPairs);
+        System.out.println(resultGraph);
     }
 }
