@@ -68,4 +68,10 @@ class GraphPathsTest {
         int num = GraphPaths.shortestPathBFS(resultGraph, 1, 4);
         System.out.println(num);
     }
+
+    @Test
+    void topologicalSort() {
+        List<Integer> tsResult = GraphPaths.topologicalSort(graph);
+        System.out.println(tsResult);
+    }
 }

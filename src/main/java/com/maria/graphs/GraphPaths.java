@@ -89,4 +89,31 @@ public class GraphPaths {
         }
         return -1;
     }
+
+    public static List<Integer> topologicalSort(Map<Integer, List<Integer>> graph) {
+        Set<Integer> visited = new HashSet<>();
+        List<Integer> ordering = new ArrayList<>();
+        for (Integer key: graph.keySet()) {
+            if (!visited.contains(key)) {
+                topsortDFS(graph, key, visited, ordering);
+            }
+        }
+        Collections.reverse(ordering);
+        return ordering;
+    }
+
+    private static void topsortDFS(Map<Integer, List<Integer>> graph, Integer node,
+                                            Set<Integer> visited, List<Integer> tsList) {
+        if (visited.contains(node)) return;
+        visited.add(node);
+
+        List<Integer> neighbors = graph.get(node);
+        for (Integer neighbor: neighbors) {
+            topsortDFS(graph, neighbor, visited, tsList);
+        }
+        tsList.add(node);
+        return;
+    }
+
+
 }
