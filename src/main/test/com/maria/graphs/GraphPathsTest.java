@@ -11,6 +11,7 @@ class GraphPathsTest {
     public static Map<Integer, List<Integer>> graph = new HashMap<>();
     public static List<List<Integer>> graphInPairs = new ArrayList<>();
     public static List<List<Integer>> graphInPairs2 = new ArrayList<>();
+    public static Map<Integer, List<Edge>> awfulDAG = new HashMap<>();
 
     static {
         graph.put(1, List.of(2));
@@ -36,6 +37,14 @@ class GraphPathsTest {
         graphInPairs2.add(List.of(5, 4));
 //        graphInPairs2.add(List.of(6, 7));
 //        graphInPairs2.add(List.of(7, 4));
+
+        awfulDAG.put(1, List.of(new Edge(2, 2), new Edge(3, 3)));
+        awfulDAG.put(2, List.of(new Edge(3, 2), new Edge(4, 1)));
+        awfulDAG.put(3, List.of(new Edge(4, 5), new Edge(5, 7), new Edge(6, 8)));
+        awfulDAG.put(4, List.of(new Edge(6, 2)));
+        awfulDAG.put(5, new ArrayList<>());
+        awfulDAG.put(6, List.of(new Edge(7, 1)));
+        awfulDAG.put(7, new ArrayList<>());
     }
 
     @Test
@@ -73,5 +82,16 @@ class GraphPathsTest {
     void topologicalSort() {
         List<Integer> tsResult = GraphPaths.topologicalSort(graph);
         System.out.println(tsResult);
+    }
+
+    @Test
+    void topologicalSort2() {
+        List<Integer> topsort = GraphPaths.topologicalSort2(awfulDAG);
+        System.out.println(topsort);
+    }
+
+    @Test
+    void singleSourceShortestPath() {
+        GraphPaths.singleSourceShortestPath(awfulDAG);
     }
 }

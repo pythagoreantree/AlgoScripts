@@ -115,5 +115,53 @@ public class GraphPaths {
         return;
     }
 
+    public static List<Integer> topologicalSort2(Map<Integer, List<Edge>> graph) {
+        Set<Integer> visited = new HashSet<>();
+        List<Integer> ordering = new ArrayList<>();
+        for (Integer key: graph.keySet()) {
+            topsortDFS2(graph, key, visited, ordering);
+        }
+        Collections.reverse(ordering);
+        return ordering;
+    }
+
+    private static void topsortDFS2(Map<Integer, List<Edge>> graph, Integer node,
+                                    Set<Integer> visited, List<Integer> tsList) {
+        if (visited.contains(node)) return;
+        visited.add(node);
+
+        List<Edge> neighbors = graph.get(node);
+        for (Edge neighbor: neighbors) {
+            topsortDFS2(graph, neighbor.to, visited, tsList);
+        }
+        tsList.add(node);
+        return;
+    }
+
+    /*
+    * Single Source Shortest Path for DAG
+    * */
+    public static void singleSourceShortestPath(Map<Integer, List<Edge>> graph) {
+        List<Integer> topsort = topologicalSort2(graph);
+
+        Integer[] minPaths = new Integer[topsort.size()];
+        Arrays.fill(minPaths, Integer.MAX_VALUE);
+        minPaths[0] = 0;
+        for (int i = 0; i < topsort.size(); i++) {
+            Integer tsVal = topsort.get(i);
+            List<Edge> edges = graph.get(tsVal);
+            for (Edge edge: edges) {
+                Integer node = edge.to;
+                Integer weight =  edge.weight;
+                int newW = minPaths[tsVal - 1] + weight;
+                if (minPaths[node - 1] > newW)
+                    minPaths[node - 1] = newW;
+            }
+        }
+        for(Integer intgr: minPaths)
+            System.out.print(intgr + " ");
+
+    }
+
 
 }

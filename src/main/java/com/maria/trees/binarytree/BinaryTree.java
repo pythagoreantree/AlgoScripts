@@ -545,7 +545,7 @@ public class BinaryTree {
         // traverse the tree
         while (curr != null || stack.size() > 0) {
 
-            /* Reach the left most Node of the curr Node */
+            /* Reach the left most Edge of the curr Edge */
             while (curr != null) {
                 /* place pointer to a tree node on the stack before traversing the node's left subtree */
                 stack.push(curr);
