@@ -240,4 +240,30 @@ public class DynamicProgramming {
 
         return dp.get(targetSum);
     }
+
+    public static void climbingStairsWithCosts(int[] costs) {
+        int len = costs.length + 1;
+        Integer[] dp = new Integer[len + 1];
+        Arrays.fill(dp, null);
+        dp[0] = 0;
+
+        for (int i = 0; i <= len; i++) {
+            if (i + 1 <= len + 1) {
+                if (dp[i + 1] == null) {
+                    dp[i + 1] = dp[i] + costs[i];
+                } else {
+                    dp[i + 1] = Math.min(dp[i + 1], dp[i] + costs[i]);
+                }
+            }
+            if (i + 2 <= len + 1) {
+                if (dp[i + 2] == null) {
+
+                    dp[i + 2] = dp[i] + costs[i + 1];
+                } else {
+                    dp[i + 2] = Math.min(dp[i + 2], dp[i] + costs[i + 1]);
+                }
+            }
+        }
+        System.out.println(Arrays.asList(dp));
+    }
 }

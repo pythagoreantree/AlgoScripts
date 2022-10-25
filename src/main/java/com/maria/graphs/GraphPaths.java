@@ -132,7 +132,7 @@ public class GraphPaths {
 
         List<Edge> neighbors = graph.get(node);
         for (Edge neighbor: neighbors) {
-            topsortDFS2(graph, neighbor.to, visited, tsList);
+            topsortDFS2(graph, (Integer) neighbor.to, visited, tsList);
         }
         tsList.add(node);
         return;
@@ -152,7 +152,7 @@ public class GraphPaths {
             Integer tsVal = topsort.get(i);
             List<Edge> edges = graph.get(tsVal);
             for (Edge edge: edges) {
-                Integer node = edge.to;
+                Integer node = (Integer) edge.to;
                 Integer weight =  edge.weight;
                 int newW = minPaths[tsVal - 1] + weight;
                 if (minPaths[node - 1] > newW)
