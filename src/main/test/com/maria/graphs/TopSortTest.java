@@ -75,7 +75,7 @@ class TopSortTest {
 
     @Test
     void topSortCharWeightedGraph() {
-        System.out.println(Arrays.asList(TopSort.topSortChar(charGraph)));
+        System.out.println(TopSort.topSortChar(charGraph));
     }
 
     @Test
@@ -85,6 +85,11 @@ class TopSortTest {
 
     @Test
     void ssspChar() {
-        System.out.println(TopSort.ssspChar(charGraph));
+        List<String> paths = TopSort.ssspChar(charGraph);
+        System.out.println(paths);
+
+        List<String> topSort = TopSort.topSortChar(charGraph);
+        List<String> minPath = TopSort.calcMinPath(topSort, paths);
+        System.out.println(minPath);
     }
 }

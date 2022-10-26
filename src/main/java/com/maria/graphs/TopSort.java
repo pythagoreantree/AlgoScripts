@@ -104,11 +104,13 @@ public class TopSort {
     }
 
 
-    public static List<Integer> ssspChar(Map<String, List<Edge>> graph) {
+    public static List<String> ssspChar(Map<String, List<Edge>> graph) {
         List<String> topOrdering = topSortChar(graph);
         Integer[] pathLengths = new Integer[graph.size()];
+        String[] pathsStrings = new String[graph.size()];
         Arrays.fill(pathLengths, null);
         pathLengths[0] = 0;
+        pathsStrings[0] = "";
 
         for (String node: topOrdering) {
             int nodeIndex = topOrdering.indexOf(node);
@@ -117,11 +119,27 @@ public class TopSort {
                 int index = topOrdering.indexOf(neighbor.to);
                 if (pathLengths[index] == null) {
                     pathLengths[index] = pathLengths[nodeIndex] + neighbor.weight;
+                    pathsStrings[index] = node;
                 } else {
-                    pathLengths[index] = Math.min(pathLengths[index], pathLengths[nodeIndex] + neighbor.weight);
+                    if (pathLengths[index] > pathLengths[nodeIndex] + neighbor.weight) {
+                        pathLengths[index] = pathLengths[nodeIndex] + neighbor.weight;
+                        pathsStrings[index] = node;
+                    }
                 }
             }
         }
-        return Arrays.asList(pathLengths);
+        return Arrays.asList(pathsStrings);
+    }
+
+    public static List<String> calcMinPath(List<String> topSort, List<String> paths) {
+        Deque<String> minPath = new LinkedList<>();
+        minPath.addFirst(topSort.get(topSort.size() - 1));
+        int lastIndex = paths.size() - 1;
+        while (lastIndex > 0) {
+            String letter = paths.get(lastIndex);
+            minPath.addFirst(letter);
+            lastIndex = topSort.indexOf(letter);
+        }
+        return new ArrayList<>(minPath);
     }
 }
