@@ -15,6 +15,10 @@ public class MaxHeap {
         this.heapArray.addAll(array);
     }
 
+    public int size() {
+        return heapArray.size();
+    }
+
     public Integer getMax() {
         checkHeapNonEmpty();
         return heapArray.get(0);
@@ -61,8 +65,24 @@ public class MaxHeap {
         siftDown(idx);
     }
 
-    public void insertElement() {
+    public void insert(Object value) {
+        Integer nodeValue = (Integer) value;
+        heapArray.add(nodeValue);
+        siftUp(heapArray.size() - 1);
+    }
 
+    public void delete(Integer idx) {
+        checkHeapNonEmpty();
+        isIndexInArray(idx);
+
+        int lastIndex = heapArray.size() - 1;
+        if (idx == lastIndex) {
+            heapArray.remove(lastIndex);
+            return;
+        }
+        swapNodeValues(idx, lastIndex);
+        heapArray.remove(lastIndex);
+        siftDown(idx);
     }
 
     public void buildHeapFromArray(Integer[] arr) {
@@ -78,7 +98,7 @@ public class MaxHeap {
     }
 
     public void siftUp(Integer idx) {
-        checkIndex(idx);
+        isIndexInArray(idx);
         Index index = new Index(idx);
 
         while (index.getParentIndex() != -1) {
@@ -96,7 +116,7 @@ public class MaxHeap {
     }
 
     public void siftDown(Integer idx) {
-        checkIndex(idx);
+        isIndexInArray(idx);
         Index index = new Index(idx);
 
         while (hasLeftChild(index) || hasRightChild(index)) {
@@ -127,7 +147,7 @@ public class MaxHeap {
 
     }
 
-    private void checkIndex(Integer idx) {
+    private void isIndexInArray(Integer idx) {
         if (idx < 0 || idx >= heapArray.size()) {
             throw new IndexOutOfBoundsException("Index idx=" + idx + " is out of range. " +
                     "There is no such element in the heap");

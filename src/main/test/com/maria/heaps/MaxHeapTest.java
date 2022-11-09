@@ -110,4 +110,35 @@ class MaxHeapTest {
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
     }
+
+    @Test
+    void insert() {
+        List<Integer> testList = List.of(24, 14, 10, 7, 4, 9, 3, 2, 1);
+        MaxHeap maxHeap = new MaxHeap(testList);
+        System.out.println(maxHeap.getHeapArray());
+
+        maxHeap.insert(17);
+        List<Integer> result = maxHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(24, 17, 10, 7, 14, 9, 3, 2, 1, 4);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void delete() {
+        List<Integer> testList = List.of(24, 17, 10, 7, 14, 9, 3, 2, 1, 4);
+        MaxHeap maxHeap = new MaxHeap(testList);
+        System.out.println(maxHeap.getHeapArray());
+
+        maxHeap.delete(maxHeap.size() - 1);
+        System.out.println(maxHeap.getHeapArray());
+
+        maxHeap.delete(1);
+        List<Integer> result = maxHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(24, 14, 10, 7, 1, 9, 3, 2);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+
+
+    }
 }
