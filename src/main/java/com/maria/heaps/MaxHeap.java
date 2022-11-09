@@ -15,6 +15,35 @@ public class MaxHeap {
         this.heapArray.addAll(array);
     }
 
+    public Integer getMax() {
+        checkHeapNonEmpty();
+        return heapArray.get(0);
+    }
+
+    private void checkHeapNonEmpty() {
+        if (heapArray.isEmpty()) {
+            throw new UnsupportedOperationException("Cannot get maximum element of an empty heap");
+        }
+    }
+
+    public Integer extractMax() {
+        checkHeapNonEmpty();
+        int lastElemIndex = heapArray.size() - 1;
+        if (heapArray.size() == 1) {
+            heapArray.clear();
+            return heapArray.get(lastElemIndex);
+        }
+
+        Integer firstElement = heapArray.get(0);
+
+        swapNodeValues(0, lastElemIndex);
+
+        heapArray.remove(lastElemIndex);
+
+        siftDown(0);
+
+        return firstElement;
+    }
 
     public void insertElement() {
 

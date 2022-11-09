@@ -57,4 +57,23 @@ class MaxHeapTest {
         heap.buildHeapFromArray(randomArray);
         System.out.println(heap.getHeapArray());
     }
+
+    @Test
+    void getMax() {
+        List<Integer> testList1 = List.of(24, 18, 10, 7, 14, 9, 3, 2, 1, 4);
+        MaxHeap maxHeap = new MaxHeap(testList1);
+        Integer maxElem = maxHeap.getMax();
+        System.out.println(maxElem);
+    }
+
+    @Test
+    void extractMax() {
+        List<Integer> testList1 = List.of(24, 18, 10, 7, 14, 9, 3, 2, 1, 4);
+        MaxHeap maxHeap = new MaxHeap(testList1);
+        System.out.println(maxHeap.getHeapArray());
+
+        Integer maxElem = maxHeap.extractMax();
+        System.out.println("Max Element: " + maxElem);
+        System.out.println(maxHeap.getHeapArray());
+    }
 }
