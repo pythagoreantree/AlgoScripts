@@ -45,6 +45,22 @@ public class MaxHeap {
         return firstElement;
     }
 
+    public void increaseKey(Integer idx) {
+        checkHeapNonEmpty();
+        Integer nodeValue = heapArray.get(idx);
+        nodeValue++;
+        heapArray.set(idx, nodeValue);
+        siftUp(idx);
+    }
+
+    public void decreaseKey(Integer idx) {
+        checkHeapNonEmpty();
+        Integer nodeValue = heapArray.get(idx);
+        nodeValue--;
+        heapArray.set(idx, nodeValue);
+        siftDown(idx);
+    }
+
     public void insertElement() {
 
     }
@@ -97,8 +113,11 @@ public class MaxHeap {
 
             } else if (hasLeftChild(index)) {
 
-                swapNodeValues(index.getIndex(), index.getLeftIndex());
-                index.setIndex(index.getLeftIndex());
+                if (getLeftValue(index) > getNodeValue(index)) {
+                    swapNodeValues(index.getIndex(), index.getLeftIndex());
+//                    index.setIndex(index.getLeftIndex());
+                }
+                return;
 
             } else if (hasRightChild(index)) {
 

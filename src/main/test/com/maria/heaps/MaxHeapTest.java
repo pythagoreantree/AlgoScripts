@@ -64,16 +64,50 @@ class MaxHeapTest {
         MaxHeap maxHeap = new MaxHeap(testList1);
         Integer maxElem = maxHeap.getMax();
         System.out.println(maxElem);
+        Assertions.assertEquals(24, maxElem);
     }
 
     @Test
     void extractMax() {
-        List<Integer> testList1 = List.of(24, 18, 10, 7, 14, 9, 3, 2, 1, 4);
-        MaxHeap maxHeap = new MaxHeap(testList1);
+        List<Integer> testList = List.of(24, 18, 10, 7, 14, 9, 3, 2, 1, 4);
+        MaxHeap maxHeap = new MaxHeap(testList);
         System.out.println(maxHeap.getHeapArray());
 
         Integer maxElem = maxHeap.extractMax();
+        List<Integer> result = maxHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(18, 14, 10, 7, 4, 9, 3, 2, 1);
+
         System.out.println("Max Element: " + maxElem);
+        System.out.println(result);
+
+        Assertions.assertIterableEquals(rightAnswer, result);
+        Assertions.assertEquals(24, maxElem);
+
+    }
+
+    @Test
+    void increaseKey() {
+        List<Integer> testList = List.of(24, 14, 10, 7, 14, 9, 3, 2, 1, 4);
+        MaxHeap maxHeap = new MaxHeap(testList);
         System.out.println(maxHeap.getHeapArray());
+
+        maxHeap.increaseKey(4);
+        List<Integer> result = maxHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(24, 15, 10, 7, 14, 9, 3, 2, 1, 4);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void decreaseKey() {
+        List<Integer> testList = List.of(24, 14, 10, 7, 14, 9, 3, 2, 1, 4);
+        MaxHeap maxHeap = new MaxHeap(testList);
+        System.out.println(maxHeap.getHeapArray());
+
+        maxHeap.decreaseKey(1);
+        List<Integer> result = maxHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(24, 14, 10, 7, 13, 9, 3, 2, 1, 4);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
     }
 }
