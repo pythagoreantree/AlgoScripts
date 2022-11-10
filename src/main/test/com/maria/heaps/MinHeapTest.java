@@ -145,4 +145,23 @@ class MinHeapTest {
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
     }
+
+    @Test
+    void insert() {
+        List<Integer> testList = List.of(1, 5, 8, 5, 10, 11, 8, 12, 15, 20);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.insert(4);
+
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 4, 8, 5, 5, 11, 8, 12, 15, 20, 10);
+
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void delete() {
+    }
 }
