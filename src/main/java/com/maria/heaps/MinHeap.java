@@ -42,10 +42,27 @@ public class MinHeap {
         return firstElement;
     }
 
+
     private void checkHeapNonEmpty() {
         if (heapArray.isEmpty()) {
             throw new UnsupportedOperationException("Cannot get minimum element of an empty heap");
         }
+    }
+
+    public void increaseKey(Integer idx) {
+        isIndexInArray(idx);
+        Integer value = heapArray.get(idx);
+        value++;
+        heapArray.set(idx, value);
+        siftDown(idx);
+    }
+
+    public void decreaseKey(Integer idx) {
+        isIndexInArray(idx);
+        Integer value = heapArray.get(idx);
+        value--;
+        heapArray.set(idx, value);
+        siftUp(idx);
     }
 
     public void buildHeapFromArray(Integer[] arr) {

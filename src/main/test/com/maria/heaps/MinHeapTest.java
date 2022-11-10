@@ -116,4 +116,33 @@ class MinHeapTest {
         Assertions.assertTrue(result.isEmpty());
         Assertions.assertEquals(1, minElem);
     }
+
+
+    @Test
+    void increaseKey() {
+        List<Integer> testList = List.of(1, 2, 10, 4, 2, 7, 9, 5, 6, 3);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.increaseKey(1);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 2, 10, 4, 3, 7, 9, 5, 6, 3);
+
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void decreaseKey() {
+        List<Integer> testList = List.of(1, 2, 10, 4, 2, 7, 9, 5, 6, 3);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.decreaseKey(4);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 1, 10, 4, 2, 7, 9, 5, 6, 3);
+
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
 }
