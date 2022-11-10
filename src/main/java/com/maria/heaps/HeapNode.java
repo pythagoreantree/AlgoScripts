@@ -1,5 +1,10 @@
 package com.maria.heaps;
 
+/**
+ * Made for HeapTree, Not Sure it is needed.
+ * May be it would be cool to convert Heap to Tree
+ * and Tree back to an array.
+ */
 public class HeapNode {
 
     private Integer value;

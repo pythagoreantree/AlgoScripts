@@ -138,7 +138,5 @@ class MaxHeapTest {
         List<Integer> rightAnswer = List.of(24, 14, 10, 7, 1, 9, 3, 2);
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
-
-
     }
 }

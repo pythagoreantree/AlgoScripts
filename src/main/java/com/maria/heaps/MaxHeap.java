@@ -24,12 +24,6 @@ public class MaxHeap {
         return heapArray.get(0);
     }
 
-    private void checkHeapNonEmpty() {
-        if (heapArray.isEmpty()) {
-            throw new UnsupportedOperationException("Cannot get maximum element of an empty heap");
-        }
-    }
-
     public Integer extractMax() {
         checkHeapNonEmpty();
         int lastElemIndex = heapArray.size() - 1;
@@ -49,8 +43,14 @@ public class MaxHeap {
         return firstElement;
     }
 
+    private void checkHeapNonEmpty() {
+        if (heapArray.isEmpty()) {
+            throw new UnsupportedOperationException("Cannot get maximum element of an empty heap");
+        }
+    }
+
     public void increaseKey(Integer idx) {
-        checkHeapNonEmpty();
+        isIndexInArray(idx);
         Integer nodeValue = heapArray.get(idx);
         nodeValue++;
         heapArray.set(idx, nodeValue);
@@ -58,7 +58,7 @@ public class MaxHeap {
     }
 
     public void decreaseKey(Integer idx) {
-        checkHeapNonEmpty();
+        isIndexInArray(idx);
         Integer nodeValue = heapArray.get(idx);
         nodeValue--;
         heapArray.set(idx, nodeValue);
@@ -72,7 +72,6 @@ public class MaxHeap {
     }
 
     public void delete(Integer idx) {
-        checkHeapNonEmpty();
         isIndexInArray(idx);
 
         int lastIndex = heapArray.size() - 1;
@@ -103,9 +102,7 @@ public class MaxHeap {
 
         while (index.getParentIndex() != -1) {
 
-            Integer parentNode = getParentValue(index);
-            Integer node = getNodeValue(index);
-            if (parentNode < node) {
+            if (getParentValue(index) < getNodeValue(index)) {
                 swapNodeValues(index.getIndex(), index.getParentIndex());
                 index.setIndex(index.getParentIndex());
             } else {
@@ -135,7 +132,7 @@ public class MaxHeap {
 
                 if (getLeftValue(index) > getNodeValue(index)) {
                     swapNodeValues(index.getIndex(), index.getLeftIndex());
-//                    index.setIndex(index.getLeftIndex());
+                    index.setIndex(index.getLeftIndex());
                 }
                 return;
 
@@ -159,7 +156,7 @@ public class MaxHeap {
         Integer biggestValue = getNodeValue(index);
         Integer biggestIndex = index.getIndex();
 
-        if (getLeftValue(index) > getNodeValue(index)) {
+        if (getLeftValue(index) > biggestValue) {
             biggestValue = getLeftValue(index);
             biggestIndex = index.getLeftIndex();
         }
@@ -191,10 +188,6 @@ public class MaxHeap {
 
     private boolean hasLeftChild(Index index) {
         return index.getLeftIndex() < heapArray.size();
-    }
-
-    private Integer getValueByIndex(Integer index) {
-        return (index >= heapArray.size())? null: heapArray.get(index);
     }
 
     private void swapNodeValues(int index1, int index2) {
