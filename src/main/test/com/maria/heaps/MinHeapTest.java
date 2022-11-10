@@ -163,5 +163,16 @@ class MinHeapTest {
 
     @Test
     void delete() {
+        List<Integer> testList = List.of(1, 2, 9, 4, 5, 19, 29, 8, 4, 6, 10);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.delete(1);
+
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 4, 9, 4, 5, 19, 29, 8, 10, 6);
+
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
     }
 }
