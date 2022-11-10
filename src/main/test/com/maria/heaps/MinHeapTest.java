@@ -53,8 +53,8 @@ class MinHeapTest {
 
     @Test
     void siftUpSortedHeap() {
-        List<Integer> testOnlyRoot = List.of(1, 2, 3, 4, 5, 8);
-        MinHeap minHeap = new MinHeap(testOnlyRoot);
+        List<Integer> testList = List.of(1, 2, 3, 4, 5, 8);
+        MinHeap minHeap = new MinHeap(testList);
         System.out.println(minHeap.getHeapArray());
 
         minHeap.siftUp(4);
@@ -102,6 +102,89 @@ class MinHeapTest {
         minHeap.siftDown(1);
         List<Integer> result = minHeap.getHeapArray();
         List<Integer> rightAnswer = List.of(1, 2, 4, 5, 3, 6, 8, 10, 12, 13);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void siftDownEmpty() {
+        MinHeap minHeap = new MinHeap();
+        System.out.println(minHeap.getHeapArray());
+
+        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+            minHeap.siftDown(0);
+        });
+
+        String expectedMessage = "Index 0 is out of bounds of the heap. Heap size: 0";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.equals(expectedMessage));
+    }
+
+    @Test
+    void siftDownOneElement() {
+        List<Integer> testOnlyRoot = List.of(1);
+        MinHeap minHeap = new MinHeap(testOnlyRoot);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.siftDown(0);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void siftDownSortedHeap() {
+        List<Integer> testList = List.of(1, 2, 3, 4, 5, 6);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.siftDown(1);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 2, 3, 4, 5, 6);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void siftDownNoSuchIndex() {
+        List<Integer> testList = List.of(1, 2, 3, 4, 5, 6);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+            minHeap.siftDown(7);
+        });
+
+        String expectedMessage = "Index 7 is out of bounds of the heap. Heap size: 6";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.equals(expectedMessage));
+    }
+
+    @Test
+    void siftDownOnlyLeftChildLeafExists() {
+        List<Integer> testList = List.of(10, 3, 2, 4, 5, 6);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.siftDown(0);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(2, 3, 6, 4, 5, 10);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void siftDownBothChildrenLeavesExist() {
+        List<Integer> testList = List.of(10, 2, 3, 4, 5, 6, 7);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.siftDown(0);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(2, 4, 3, 10, 5, 6, 7);
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
     }

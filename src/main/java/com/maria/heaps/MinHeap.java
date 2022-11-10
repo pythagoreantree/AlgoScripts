@@ -3,6 +3,9 @@ package com.maria.heaps;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 public class MinHeap {
 
@@ -70,7 +73,7 @@ public class MinHeap {
         Integer value = heapArray.get(idx);
         value -= delta;
         if (value > heapArray.get(idx)) {
-            System.out.println("ResultValue=" + value + " is greater" +
+            System.out.println("Result value " + value + " is greater" +
                     "than the current value. Can't decrease the key");
             return;
         }
@@ -79,6 +82,8 @@ public class MinHeap {
     }
 
     public void insert(Object value) {
+        requireNonNull(value, "Can't insert null into " +
+                "a priority queue.");
         Integer nodeValue = (Integer) value;
         heapArray.add(nodeValue);
         siftUp(heapArray.size() - 1);
