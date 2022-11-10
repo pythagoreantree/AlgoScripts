@@ -106,6 +106,9 @@ public class MinHeap {
     }
 
     public void siftUp(Integer idx) {
+        /*if (heapArray.isEmpty()) {
+            throw new RuntimeException("This heap is empty. Nothing to sift up.");
+        }*/
         isIndexInArray(idx);
         Index index = new Index(idx);
 
@@ -172,8 +175,8 @@ public class MinHeap {
 
     private void isIndexInArray(Integer idx) {
         if (idx < 0 || idx >= heapArray.size()) {
-            throw new IndexOutOfBoundsException("Index idx=" + idx + " is out of range. " +
-                    "There is no such element in the heap");
+            throw new IndexOutOfBoundsException("Index " + idx +
+                    " is out of bounds of the heap. Heap size: " + heapArray.size());
         }
     }
 
