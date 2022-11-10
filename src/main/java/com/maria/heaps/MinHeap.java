@@ -20,6 +20,34 @@ public class MinHeap {
         return heapArray.size();
     }
 
+    public Integer getMin() {
+        checkHeapNonEmpty();
+        return heapArray.get(0);
+    }
+
+    public Integer extractMin() {
+        checkHeapNonEmpty();
+
+        int lastIndex = heapArray.size() - 1;
+
+        Integer firstElement = heapArray.get(0);
+
+        swapNodeValues(0, lastIndex);
+
+        heapArray.remove(lastIndex);
+
+        if (!heapArray.isEmpty())
+            siftDown(0);
+
+        return firstElement;
+    }
+
+    private void checkHeapNonEmpty() {
+        if (heapArray.isEmpty()) {
+            throw new UnsupportedOperationException("Cannot get minimum element of an empty heap");
+        }
+    }
+
     public void buildHeapFromArray(Integer[] arr) {
         this.heapArray.clear();
         this.heapArray.addAll(Arrays.asList(arr));

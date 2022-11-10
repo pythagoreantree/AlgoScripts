@@ -82,7 +82,22 @@ class MaxHeapTest {
 
         Assertions.assertIterableEquals(rightAnswer, result);
         Assertions.assertEquals(24, maxElem);
+    }
 
+    @Test
+    void extractRoot() {
+        List<Integer> testList = List.of(1);
+        MaxHeap maxHeap = new MaxHeap(testList);
+        System.out.println(maxHeap.getHeapArray());
+
+        Integer maxElem = maxHeap.extractMax();
+        List<Integer> result = maxHeap.getHeapArray();
+
+        System.out.println("Max Element: " + maxElem);
+        System.out.println(result);
+
+        Assertions.assertTrue(result.isEmpty());
+        Assertions.assertEquals(1, maxElem);
     }
 
     @Test

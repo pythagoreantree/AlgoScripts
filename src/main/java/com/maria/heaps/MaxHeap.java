@@ -27,10 +27,6 @@ public class MaxHeap {
     public Integer extractMax() {
         checkHeapNonEmpty();
         int lastElemIndex = heapArray.size() - 1;
-        if (heapArray.size() == 1) {
-            heapArray.clear();
-            return heapArray.get(lastElemIndex);
-        }
 
         Integer firstElement = heapArray.get(0);
 
@@ -38,7 +34,8 @@ public class MaxHeap {
 
         heapArray.remove(lastElemIndex);
 
-        siftDown(0);
+        if (!heapArray.isEmpty())
+            siftDown(0);
 
         return firstElement;
     }

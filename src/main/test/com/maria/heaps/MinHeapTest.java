@@ -74,4 +74,46 @@ class MinHeapTest {
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
     }
+
+    @Test
+    void getMin() {
+        List<Integer> testList = List.of(1, 2, 3);
+        MinHeap minHeap = new MinHeap(testList);
+        Integer minElem = minHeap.getMin();
+        System.out.println(minElem);
+        Assertions.assertEquals(1, minElem);
+    }
+
+    @Test
+    void extractMin() {
+        List<Integer> testList = List.of(1, 2, 4, 5, 3, 6, 8, 10, 12, 7);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        Integer minElem = minHeap.extractMin();
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(2, 3, 4, 5, 7, 6, 8, 10, 12);
+
+        System.out.println("Min Element: " + minElem);
+        System.out.println(result);
+
+        Assertions.assertIterableEquals(rightAnswer, result);
+        Assertions.assertEquals(1, minElem);
+    }
+
+    @Test
+    void extractRoot() {
+        List<Integer> testList = List.of(1);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        Integer minElem = minHeap.extractMin();
+        List<Integer> result = minHeap.getHeapArray();
+
+        System.out.println("Min Element: " + minElem);
+        System.out.println(result);
+
+        Assertions.assertTrue(result.isEmpty());
+        Assertions.assertEquals(1, minElem);
+    }
 }
