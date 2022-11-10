@@ -147,6 +147,21 @@ class MinHeapTest {
     }
 
     @Test
+    void decreaseKeyByDelta() {
+        List<Integer> testList = List.of(1, 2, 11, 4, 10, 7, 9, 5, 6, 12);
+        MinHeap minHeap = new MinHeap(testList);
+        System.out.println(minHeap.getHeapArray());
+
+        minHeap.decreaseKey(7, 4);
+
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 1, 11, 2, 10, 7, 9, 4, 6, 12);
+
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
     void insert() {
         List<Integer> testList = List.of(1, 5, 8, 5, 10, 11, 8, 12, 15, 20);
         MinHeap minHeap = new MinHeap(testList);
@@ -175,4 +190,5 @@ class MinHeapTest {
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
     }
+
 }
