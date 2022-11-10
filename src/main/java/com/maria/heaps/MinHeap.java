@@ -65,6 +65,24 @@ public class MinHeap {
         siftUp(idx);
     }
 
+    public void insert(Object value) {
+        Integer nodeValue = (Integer) value;
+        heapArray.add(nodeValue);
+        siftUp(heapArray.size() - 1);
+    }
+
+    public void delete(Integer idx) {
+        isIndexInArray(idx);
+        int lastIndex = heapArray.size() - 1;
+        if (idx == lastIndex) {
+            heapArray.remove(lastIndex);
+            return;
+        }
+        swapNodeValues(idx, lastIndex);
+        heapArray.remove(lastIndex);
+        siftDown(idx);
+    }
+
     public void buildHeapFromArray(Integer[] arr) {
         this.heapArray.clear();
         this.heapArray.addAll(Arrays.asList(arr));
