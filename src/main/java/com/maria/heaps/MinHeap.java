@@ -65,6 +65,19 @@ public class MinHeap {
         siftUp(idx);
     }
 
+    public void decreaseKey(Integer idx, Integer delta) {
+        isIndexInArray(idx);
+        Integer value = heapArray.get(idx);
+        value -= delta;
+        if (value > heapArray.get(idx)) {
+            System.out.println("ResultValue=" + value + " is greater" +
+                    "than the current value. Can't decrease the key");
+            return;
+        }
+        heapArray.set(idx, value);
+        siftUp(idx);
+    }
+
     public void insert(Object value) {
         Integer nodeValue = (Integer) value;
         heapArray.add(nodeValue);
