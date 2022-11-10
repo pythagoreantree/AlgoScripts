@@ -1,6 +1,7 @@
 package com.maria.heaps;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MinHeap {
@@ -20,7 +21,12 @@ public class MinHeap {
     }
 
     public void buildHeapFromArray(Integer[] arr) {
+        this.heapArray.clear();
+        this.heapArray.addAll(Arrays.asList(arr));
 
+        for (int i = 0; i < heapArray.size(); i++) {
+            siftDown(i);
+        }
     }
 
     public void siftUp(Integer idx) {

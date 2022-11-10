@@ -3,6 +3,7 @@ package com.maria.heaps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,6 +58,19 @@ class MinHeapTest {
         minHeap.siftDown(1);
         List<Integer> result = minHeap.getHeapArray();
         List<Integer> rightAnswer = List.of(1, 2, 4, 5, 3, 6, 8, 10, 12, 13);
+        System.out.println(result);
+        Assertions.assertIterableEquals(rightAnswer, result);
+    }
+
+    @Test
+    void buildHeapFromArray() {
+        Integer[] testArray = {1, 5, 7, 2, 6, 8, 3, 4, 9, 10, 11};
+        MinHeap minHeap = new MinHeap();
+        System.out.println(Arrays.asList(testArray));
+
+        minHeap.buildHeapFromArray(testArray);
+        List<Integer> result = minHeap.getHeapArray();
+        List<Integer> rightAnswer = List.of(1, 2, 3, 4, 6, 8, 7, 5, 9, 10, 11);
         System.out.println(result);
         Assertions.assertIterableEquals(rightAnswer, result);
     }
