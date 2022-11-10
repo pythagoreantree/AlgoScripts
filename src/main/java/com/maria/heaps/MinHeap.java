@@ -96,13 +96,9 @@ public class MinHeap {
         isIndexInArray(idx);
         Index index = new Index(idx);
 
-        while (index.getParentIndex() != -1) {
-            if (getParentValue(index) > getNodeValue(index)) {
-                swapNodeValues(index.getIndex(), index.getParentIndex());
-                index.setIndex(index.getParentIndex());
-            } else {
-                return;
-            }
+        while (index.getParentIndex() != -1 && getParentValue(index) > getNodeValue(index)) {
+            swapNodeValues(index.getIndex(), index.getParentIndex());
+            index.setIndex(index.getParentIndex());
         }
     }
 
