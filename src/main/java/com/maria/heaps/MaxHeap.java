@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+
 public class MaxHeap {
 
     private final List<Integer> heapArray = new ArrayList<>();
@@ -63,6 +65,8 @@ public class MaxHeap {
     }
 
     public void insert(Object value) {
+        requireNonNull(value, "Can't insert null into " +
+                "a priority queue.");
         Integer nodeValue = (Integer) value;
         heapArray.add(nodeValue);
         siftUp(heapArray.size() - 1);
