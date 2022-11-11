@@ -13,23 +13,18 @@ public class AMaxHeap<T> extends AbstractHeap<T> {
     }
 
     @Override
-    public boolean ifDisorderedWithParent(Index index) {
-        return ((Comparable) getParentValue(index)).compareTo(getNodeValue(index)) < 0;
+    public boolean isDisorderedWithParent(T parent, T node) {
+        return ((Comparable) parent).compareTo(node) < 0;
     }
 
     @Override
-    public Integer heapify(Index index) {
-
-        Integer biggestIndex = index.getIndex();
-        T biggestValue = getNodeValue(index);
-
-        if (((Comparable)getLeftValue(index)).compareTo(biggestValue) > 0) {
-            biggestValue = getLeftValue(index);
-            biggestIndex = index.getLeftIndex();
-        }
-        if (((Comparable)getRightValue(index)).compareTo(biggestValue) > 0) {
-            biggestIndex = index.getRightIndex();
-        }
-        return biggestIndex;
+    public boolean isLeftChosen(T leftValue, T value) {
+        return ((Comparable)leftValue).compareTo(value) > 0;
     }
+
+    @Override
+    public boolean isRightChosen(T rightValue, T value) {
+        return ((Comparable)rightValue).compareTo(value) > 0;
+    }
+
 }

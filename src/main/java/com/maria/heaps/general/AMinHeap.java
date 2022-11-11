@@ -13,26 +13,18 @@ public class AMinHeap<T> extends AbstractHeap<T> {
     }
 
     @Override
-    public boolean ifDisorderedWithParent(Index index) {
-        return ((Comparable) getParentValue(index)).compareTo(getNodeValue(index)) > 0;
+    public boolean isDisorderedWithParent(T parent, T node) {
+        return ((Comparable) parent).compareTo(node) > 0;
     }
-
 
     @Override
-    public Integer heapify(Index index) {
-
-        Integer smallestIndex = index.getIndex();
-        T smallestValue = getNodeValue(index);
-
-        if (index.getLeftIndex() < size() &&
-                ((Comparable) getLeftValue(index)).compareTo(smallestValue) < 0) {
-            smallestIndex = index.getLeftIndex();
-            smallestValue = getLeftValue(index);
-        }
-        if (index.getRightIndex() < size()
-                && ((Comparable)getRightValue(index)).compareTo(smallestValue) < 0) {
-            smallestIndex = index.getRightIndex();
-        }
-        return smallestIndex;
+    public boolean isLeftChosen(T leftValue, T value) {
+        return ((Comparable) leftValue).compareTo(value) < 0;
     }
+
+    @Override
+    public boolean isRightChosen(T rightValue, T value) {
+        return ((Comparable)rightValue).compareTo(value) < 0;
+    }
+
 }

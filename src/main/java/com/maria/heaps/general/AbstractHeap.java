@@ -112,7 +112,8 @@ public abstract class AbstractHeap<T> implements Heap<T> {
         isIndexInArray(idx);
         Index index = new Index(idx);
 
-        while (index.getParentIndex() != -1 && ifDisorderedWithParent(index)) {
+        while (index.getParentIndex() != -1 &&
+                isDisorderedWithParent(getParentValue(index), getNodeValue(index))) {
             swapNodeValues(index.getIndex(), index.getParentIndex());
             index.setIndex(index.getParentIndex());
         }
@@ -131,9 +132,25 @@ public abstract class AbstractHeap<T> implements Heap<T> {
         }
     }
 
-    public abstract boolean ifDisorderedWithParent(Index idx);
+    public abstract boolean isDisorderedWithParent(T parent, T node);
 
-    public abstract Integer heapify(Index idx);
+    protected abstract boolean isLeftChosen(T leftValue, T value);
+
+    protected abstract boolean isRightChosen(T rightValue, T value);
+
+    public Integer heapify(Index index) {
+        Integer suitableIndex = index.getIndex();
+        T suitableValue = getNodeValue(index);
+
+        if (index.getLeftIndex() < size() && isLeftChosen(getLeftValue(index), suitableValue)) {
+            suitableIndex = index.getLeftIndex();
+            suitableValue = getLeftValue(index);
+        }
+        if (index.getRightIndex() < size() && isRightChosen(getRightValue(index), suitableValue)) {
+            suitableIndex = index.getRightIndex();
+        }
+        return suitableIndex;
+    }
 
     protected void swapNodeValues(int index1, int index2) {
         T tmpValue = heapArray.get(index1);
@@ -153,35 +170,35 @@ public abstract class AbstractHeap<T> implements Heap<T> {
         return heapArray;
     }
 
-    protected boolean hasChildren(Index index) {
+    private boolean hasChildren(Index index) {
         return hasLeftChild(index) || hasRightChild(index);
     }
 
-    protected boolean hasRightChild(Index index) {
+    private boolean hasRightChild(Index index) {
         return index.getRightIndex() < heapArray.size();
     }
 
-    protected boolean hasLeftChild(Index index) {
+    private boolean hasLeftChild(Index index) {
         return index.getLeftIndex() < heapArray.size();
     }
 
-    protected T getNodeValue(Index index) {
+    private T getNodeValue(Index index) {
         return heapArray.get(index.getIndex());
     }
 
-    protected T getParentValue(Index index) {
+    private T getParentValue(Index index) {
         return heapArray.get(index.getParentIndex());
     }
 
-    protected T getLeftValue(Index index) {
+    private T getLeftValue(Index index) {
         return heapArray.get(index.getLeftIndex());
     }
 
-    protected T getRightValue(Index index) {
+    private T getRightValue(Index index) {
         return heapArray.get(index.getRightIndex());
     }
 
-    protected class Index {
+    private class Index {
 
         private Integer index;
 
