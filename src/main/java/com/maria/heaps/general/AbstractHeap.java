@@ -198,6 +198,10 @@ public abstract class AbstractHeap<T> implements Heap<T> {
         return heapArray.get(index.getRightIndex());
     }
 
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
     private class Index {
 
         private Integer index;

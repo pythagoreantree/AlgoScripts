@@ -48,7 +48,7 @@ public class TopSort {
         visited.add(node);
 
         for (Edge neighbor: graph.get(node)) {
-            pos = tsCharDFS(graph, neighbor.to.toString(), visited, topOrdering, pos);
+            pos = tsCharDFS(graph, neighbor.getTo().toString(), visited, topOrdering, pos);
         }
         topOrdering[pos] = node;
         pos -= 1;
@@ -72,7 +72,7 @@ public class TopSort {
         visited.add(node);
 
         for (Edge neighbor: graph.get(node)) {
-            pos = tsCommonDFS(graph, neighbor.to, visited, topOrdering, pos);
+            pos = tsCommonDFS(graph, neighbor.getTo(), visited, topOrdering, pos);
         }
         topOrdering[pos] = node;
         pos -= 1;
@@ -92,11 +92,11 @@ public class TopSort {
            }
            List<Edge> neighbors = graph.get(node);
            for (Edge neighbor: neighbors) {
-               Integer neighborValue = (Integer) neighbor.to;
+               Integer neighborValue = (Integer) neighbor.getTo();
                if (pathLengths[neighborValue] == null) {
-                   pathLengths[neighborValue] = pathLengths[nodeValue] + neighbor.weight;
+                   pathLengths[neighborValue] = pathLengths[nodeValue] + neighbor.getWeight();
                } else {
-                   pathLengths[neighborValue] = Math.min(pathLengths[neighborValue], pathLengths[nodeValue] + neighbor.weight);
+                   pathLengths[neighborValue] = Math.min(pathLengths[neighborValue], pathLengths[nodeValue] + neighbor.getWeight());
                }
            }
        }
@@ -116,13 +116,13 @@ public class TopSort {
             int nodeIndex = topOrdering.indexOf(node);
             List<Edge> neighbors = graph.get(node);
             for (Edge neighbor: neighbors) {
-                int index = topOrdering.indexOf(neighbor.to);
+                int index = topOrdering.indexOf(neighbor.getTo());
                 if (pathLengths[index] == null) {
-                    pathLengths[index] = pathLengths[nodeIndex] + neighbor.weight;
+                    pathLengths[index] = pathLengths[nodeIndex] + neighbor.getWeight();
                     pathsStrings[index] = node;
                 } else {
-                    if (pathLengths[index] > pathLengths[nodeIndex] + neighbor.weight) {
-                        pathLengths[index] = pathLengths[nodeIndex] + neighbor.weight;
+                    if (pathLengths[index] > pathLengths[nodeIndex] + neighbor.getWeight()) {
+                        pathLengths[index] = pathLengths[nodeIndex] + neighbor.getWeight();
                         pathsStrings[index] = node;
                     }
                 }
