@@ -4,7 +4,8 @@ import java.util.*;
 
 public class BellmanFord {
 
-    private static final Integer BIG_CONST = 2^30;
+    private static final Integer BIG_CONST = Double.valueOf(Math.pow(2.0, 30.0)).intValue();
+    private static final Integer BIG_NEGATIVE_CONST = (-1)*BIG_CONST;
 
     public static Integer[] startBellManFord(Map<Integer, List<Edge>> graph) {
         if (graph.isEmpty()) {
@@ -38,7 +39,15 @@ public class BellmanFord {
         }
 
         //Here I will detect a negative cycle
-
+        for(int i = 0; i < numberOfVertices - 1; i++) {
+            for (EdgeExt edge: edgeList) {
+                Integer firstNode = (Integer) edge.getFrom();
+                Integer secondNode = (Integer) edge.getTo();
+                if (dist[firstNode] + edge.getWeight() < dist[secondNode]) {
+                    dist[secondNode] = BIG_NEGATIVE_CONST;
+                }
+            }
+        }
         return dist;
     }
 
