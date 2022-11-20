@@ -43,7 +43,7 @@ public class BellmanFord {
             for (EdgeExt edge: edgeList) {
                 Integer firstNode = (Integer) edge.getFrom();
                 Integer secondNode = (Integer) edge.getTo();
-                if (dist[firstNode] == BIG_NEGATIVE_CONST ||
+                if (BIG_NEGATIVE_CONST.equals(dist[firstNode]) ||
                         (dist[firstNode] + edge.getWeight() < dist[secondNode])) {
                     dist[secondNode] = BIG_NEGATIVE_CONST;
                 }
@@ -63,5 +63,14 @@ public class BellmanFord {
             }
         }
         return edges;
+    }
+
+    public static boolean hasNegativeCycle(Map<Integer, List<Edge>> graph) {
+        Integer[] distArray = startBellManFord(graph);
+        for (Integer distance: distArray) {
+            if (BIG_NEGATIVE_CONST.equals(distance))
+                return true;
+        }
+        return false;
     }
 }

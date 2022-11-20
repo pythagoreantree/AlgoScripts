@@ -1,5 +1,6 @@
 package com.maria.graphs;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -48,5 +49,13 @@ class BellmanFordTest {
     void transformAdjListToPairs2() {
         List<EdgeExt> edges = BellmanFord.transformAdjListToPairs(graph2);
         System.out.println(edges);
+    }
+
+    @Test
+    void hasNegativeCycle() {
+        boolean hasNegCycle = BellmanFord.hasNegativeCycle(graph2);
+        System.out.println(hasNegCycle);
+        Assertions.assertTrue(hasNegCycle);
+        Assertions.assertFalse(BellmanFord.hasNegativeCycle(graph));
     }
 }
