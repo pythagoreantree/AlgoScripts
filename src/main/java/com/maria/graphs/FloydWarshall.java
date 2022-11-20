@@ -6,9 +6,19 @@ import java.util.Map;
 
 public class FloydWarshall {
 
-    public static void startFloydWarshall(Map<Integer, List<Edge>> graph) {
-        Integer[][] adjMatrix = transformGraphToMatrix(graph);
+    private static final Integer BIG_CONST = Double.valueOf(Math.pow(2.0, 30.0)).intValue();
 
+    public static Integer[][] startFloydWarshall(Map<Integer, List<Edge>> graph) {
+        Integer[][] aMatrix = transformGraphToMatrix(graph);
+
+        for (int k = 0; k < graph.size(); k++) {
+            for (int i = 0; i < aMatrix.length; i++) {
+                for (int j = 0; j < aMatrix.length; j++) {
+                    aMatrix[i][j] = Math.min(aMatrix[i][j], aMatrix[i][k] + aMatrix[k][j]);
+                }
+            }
+        }
+        return aMatrix;
     }
 
     public static Integer[][] transformGraphToMatrix(Map<Integer, List<Edge>> graph) {
@@ -28,10 +38,14 @@ public class FloydWarshall {
         for (int row = 0; row < matrixNumberOfNodes; row++) {
             for (int col = 0; col < matrixNumberOfNodes; col++) {
                 if (row != col && matrix[row][col] == 0) {
-                    matrix[row][col] = Integer.MAX_VALUE;
+                    matrix[row][col] = BIG_CONST;
                 }
             }
         }
         return matrix;
+    }
+
+    public static void printMatrix(Integer[][] matrix) {
+        Arrays.stream(matrix).forEach(row -> System.out.println(Arrays.asList(row)));
     }
 }

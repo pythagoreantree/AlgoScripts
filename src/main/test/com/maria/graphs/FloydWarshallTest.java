@@ -20,4 +20,18 @@ class FloydWarshallTest {
         Integer[][] adjMatrix = FloydWarshall.transformGraphToMatrix(graph);
         Arrays.stream(adjMatrix).forEach(row -> System.out.println(Arrays.asList(row)));
     }
+
+
+    /*
+    * Right result:
+    * [0, 3, 5, 6]
+    * [5, 0, 2, 3]
+    * [3, 6, 0, 1]
+    * [2, 5, 7, 0]
+    * */
+    @Test
+    void startFloydWarshall() {
+        Integer[][] result = FloydWarshall.startFloydWarshall(graph);
+        FloydWarshall.printMatrix(result);
+    }
 }
