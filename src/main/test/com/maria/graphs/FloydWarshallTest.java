@@ -1,8 +1,10 @@
 package com.maria.graphs;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 class FloydWarshallTest {
 
@@ -33,5 +35,14 @@ class FloydWarshallTest {
     void startFloydWarshall() {
         Integer[][] result = FloydWarshall.startFloydWarshall(graph);
         FloydWarshall.printMatrix(result);
+        int numberOfElements = graph.size();
+        Integer[][] expected = new Integer[numberOfElements][numberOfElements];
+        expected[0] = new Integer[]{0, 3, 5, 6};
+        expected[1] = new Integer[]{5, 0, 2, 3};
+        expected[2] = new Integer[]{3, 6, 0, 1};
+        expected[3] = new Integer[]{2, 5, 7, 0};
+
+        IntStream.range(0, result.length)
+                .forEachOrdered(index -> Assertions.assertArrayEquals(result[index], expected[index]));
     }
 }
