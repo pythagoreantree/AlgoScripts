@@ -43,7 +43,8 @@ public class BellmanFord {
             for (EdgeExt edge: edgeList) {
                 Integer firstNode = (Integer) edge.getFrom();
                 Integer secondNode = (Integer) edge.getTo();
-                if (dist[firstNode] + edge.getWeight() < dist[secondNode]) {
+                if (dist[firstNode] == BIG_NEGATIVE_CONST ||
+                        (dist[firstNode] + edge.getWeight() < dist[secondNode])) {
                     dist[secondNode] = BIG_NEGATIVE_CONST;
                 }
             }
