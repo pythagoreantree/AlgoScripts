@@ -37,31 +37,26 @@ public class NumberOfIslands {
     * This version is for LeetCode
     * */
     public static int countIslandsII(char[][] grid) {
-        Set<String> visited = new HashSet<>();
         int numberOfIslands = 0;
         for (int i = 0; i < grid.length; i++)
             for (int j = 0; j < grid[i].length; j++) {
-                char value = grid[i][j];
-                if (value == '0') continue;
-                if (visited.contains(i+","+j)) continue;
-                dfsII(i, j, visited, grid);
-                numberOfIslands++;
+                if (grid[i][j] == '1') {
+                    dfsII(i, j, grid);
+                    numberOfIslands++;
+                }
             }
         return numberOfIslands;
     }
 
-    private static void dfsII(int i, int j, Set<String> visited, char[][] map) {
-        if (i < 0 || i >= map.length) return;
-        if (j < 0 || j >= map[0].length) return;
+    private static void dfsII(int i, int j, char[][] map) {
+        if (i < 0 || i >= map.length || j < 0 || j >= map[0].length) return;
         if (map[i][j] == '0') return;
 
-        String pos = i + "," + j;
-        if (visited.contains(pos)) return;
-        visited.add(pos);
+        map[i][j] = '0';
 
-        dfsII(i - 1, j, visited, map);
-        dfsII(i + 1, j, visited, map);
-        dfsII(i, j - 1, visited, map);
-        dfsII(i, j + 1, visited, map);
+        dfsII(i - 1, j, map);
+        dfsII(i + 1, j, map);
+        dfsII(i, j - 1, map);
+        dfsII(i, j + 1, map);
     }
 }
