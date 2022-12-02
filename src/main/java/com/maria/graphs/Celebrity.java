@@ -86,4 +86,27 @@ public class Celebrity {
         }
         return celebrity;
     }
+
+    //In-Out Degree Method
+    public static int findCelebrityV3(int n) {
+        int[] inDegree = new int[n];
+        int[] outDegree = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (knows(i, j)) {
+                    outDegree[i] += 1;
+                    inDegree[j] += 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (inDegree[i] == (n - 1) && outDegree[i] == 0) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
