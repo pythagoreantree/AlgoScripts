@@ -15,14 +15,14 @@ class CelebrityTest {
 
     @Test
     void findCelebrityV2() {
-        int label = Celebrity.findCelebrityV2(6);
+        int label = Celebrity.findCelebrityWithStack(6);
         System.out.println(label);
         Assertions.assertEquals(2, label);
     }
 
     @Test
     void findCelebrityV3() {
-        int label = Celebrity.findCelebrityV3(6);
+        int label = Celebrity.findCelebrityWithGraph(6);
         System.out.println(label);
         Assertions.assertEquals(2, label);
     }

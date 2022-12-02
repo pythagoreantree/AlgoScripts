@@ -52,7 +52,7 @@ public class Celebrity {
     }
 
     //Stack Implementation
-    public static int findCelebrityV2(int n) {
+    public static int findCelebrityWithStack(int n) {
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = (n - 1); i >= 0; i--) {
             stack.push(i);
@@ -88,7 +88,7 @@ public class Celebrity {
     }
 
     //In-Out Degree Method
-    public static int findCelebrityV3(int n) {
+    public static int findCelebrityWithGraph(int n) {
         int[] inDegree = new int[n];
         int[] outDegree = new int[n];
 
@@ -107,6 +107,10 @@ public class Celebrity {
             }
         }
 
+        return -1;
+    }
+
+    public static int findCelebrityTwoPointers(int n) {
         return -1;
     }
 }
