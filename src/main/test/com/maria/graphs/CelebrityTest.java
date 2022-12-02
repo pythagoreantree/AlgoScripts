@@ -26,4 +26,11 @@ class CelebrityTest {
         System.out.println(label);
         Assertions.assertEquals(2, label);
     }
+
+    @Test
+    void findCelebrityV4() {
+        int label = Celebrity.findCelebrityTwoPointers(6);
+        System.out.println(label);
+        Assertions.assertEquals(2, label);
+    }
 }
