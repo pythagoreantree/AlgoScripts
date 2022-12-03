@@ -9,6 +9,7 @@ class NumberOfIslandsTest {
 
     public static final Integer[][] islands;
     public static final char[][] islandsII;
+    public static final int[][] islandsIII;
 
     static {
         islands = new Integer[][]{
@@ -24,6 +25,13 @@ class NumberOfIslandsTest {
                 {'1', '0', '1', '0'},
                 {'1', '0', '0', '0'}
         };
+
+        islandsIII = new int[][]{
+                {0, 1, 0, 0},
+                {1, 1, 1, 0},
+                {0, 1, 0, 0},
+                {1, 1, 0, 0}
+        };
     }
 
     @Test
@@ -38,5 +46,12 @@ class NumberOfIslandsTest {
         int num = NumberOfIslands.countIslandsII(islandsII);
         System.out.println(num);
         Assertions.assertEquals(num, 2);
+    }
+
+    @Test
+    void islandPerimeter() {
+        int perimeter = NumberOfIslands.islandPerimeterDFS(islandsIII);
+        System.out.println(perimeter);
+        Assertions.assertEquals(16, perimeter);
     }
 }
