@@ -8,7 +8,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class WordSearchTest {
 
     @Test
-    void exist() {
+    void exist1() {
+        char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
+        String word = "ABCCED";
+
+        boolean ans = WordSearch.exist(board, word);
+        System.out.println(ans);
+        Assertions.assertTrue(ans);
+    }
+
+    @Test
+    void exist2() {
         char[][] board = {{'C', 'A', 'A'}, {'A', 'A', 'A'}, {'B', 'C', 'D'}};
         String word = "AAB";
 
@@ -18,7 +28,7 @@ class WordSearchTest {
     }
 
     @Test
-    void exist2() {
+    void exist3() {
         char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'E', 'S'}, {'A', 'D', 'E', 'E'}};
         String word = "ABCESEEEFS";
 
