@@ -6,7 +6,6 @@ import java.util.List;
 public class PacificAtlanticOcean {
 
     public static List<List<Integer>> pacificAtlantic(int[][] heights) {
-        //first we need to fill pacific cells
         int m = heights.length;
         int n = heights[0].length;
 
@@ -22,7 +21,6 @@ public class PacificAtlanticOcean {
         for (Tuple coords: pacificLine) {
             dfs(coords.getX(), coords.getY(), heights, pacific);
         }
-        System.out.println(pacific);
 
         List<Tuple> atlanticLine = new ArrayList<>();
         for (int j = 0; j < n; j++) {
@@ -36,7 +34,6 @@ public class PacificAtlanticOcean {
         for (Tuple coords: atlanticLine) {
             dfs(coords.getX(), coords.getY(), heights, atlantic);
         }
-        System.out.println(atlantic);
 
         List<List<Integer>> resultCoords = new ArrayList<>();
         for (int i = 0; i < m; i++) {
