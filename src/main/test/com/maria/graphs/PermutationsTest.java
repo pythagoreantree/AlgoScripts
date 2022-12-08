@@ -11,7 +11,7 @@ class PermutationsTest {
     @Test
     void permute() {
         int[] nums = new int[]{1, 2, 3};
-        List<List<Integer>> resultLists = Permutations.permute(nums);
+        List<List<Integer>> resultLists = Permutations.permute2(nums);
         System.out.println(resultLists);
     }
 }

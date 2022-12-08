@@ -31,7 +31,40 @@ public class Permutations {
                 buildChains(currentList, nums, currentSet);
             }
         }
-
-
     }
+
+    //Second Solution
+    public static List<List<Integer>> permute2(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num: nums) {
+            numSet.add(num);
+        }
+        return buildPermutations(nums, numSet);
+    }
+
+    private static List<List<Integer>> buildPermutations(int[] nums, Set<Integer> numSet) {
+        if (numSet.size() == 1) {
+            List<List<Integer>> all = new ArrayList<>();
+            List<Integer> curList = new ArrayList<Integer>(numSet);
+            all.add(curList);
+            return all;
+        }
+
+
+        List<List<Integer>> resList = new ArrayList<>();
+        for (int k = 0; k < nums.length; k++) {
+            int current = nums[k];
+            if (numSet.contains(current)) {
+                Set<Integer> currentSet = new HashSet<>(numSet);
+                currentSet.remove(current);
+                List<List<Integer>> l = buildPermutations(nums, currentSet);
+                for (List<Integer> l1: l) {
+                    l1.add(0, current);
+                    resList.add(l1);
+                }
+            }
+        }
+        return resList;
+    }
+
 }
