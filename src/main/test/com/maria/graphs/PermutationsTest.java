@@ -22,4 +22,11 @@ class PermutationsTest {
         System.out.println(resultLists);
     }
 
+    @Test
+    void permute3() {
+        int[] nums = new int[]{1, 2, 3};
+        List<List<Integer>> resultLists = Permutations.permute3(nums);
+        System.out.println(resultLists);
+    }
+
 }

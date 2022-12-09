@@ -67,4 +67,26 @@ public class Permutations {
         return resList;
     }
 
+    public static List<List<Integer>> permute3(int[] nums) {
+        List<List<Integer>> paths = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        buildPath(path, nums, paths);
+
+        return paths;
+    }
+
+    private static void buildPath(List<Integer> path, int[] nums, List<List<Integer>> paths) {
+        if (path.size() == nums.length) {
+            paths.add(path);
+            return;
+        }
+        for (int num: nums) {
+            if (!path.contains(num)) {
+                List<Integer> newPath = new ArrayList<>(path);
+                newPath.add(num);
+                buildPath(newPath, nums, paths);
+            }
+        }
+    }
+
 }
