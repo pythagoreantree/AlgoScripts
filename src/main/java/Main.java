@@ -1,9 +1,11 @@
-package com.maria;
+import com.maria.yandex30.BeautifulString;
+import com.maria.yandex30.Histogram;
 
 public class Main {
 
     public static void main(String[] args) {
-
+//        int max = BeautifulString.countLongest();
+//        System.out.println(max);
     }
 
     public static void print(Object s){

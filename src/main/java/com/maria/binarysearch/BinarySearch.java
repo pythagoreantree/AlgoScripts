@@ -1,7 +1,5 @@
 package com.maria.binarysearch;
 
-import com.maria.Main;
-
 import java.util.ArrayList;
 import java.util.List;
 
