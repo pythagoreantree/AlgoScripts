@@ -19,7 +19,15 @@ class NumberSmallerThanCurrentTest {
     void test2() {
         int[] nums = {7, 7, 7};
         int[] exp = {0, 0, 0};
-        int[] act = NumberSmallerThanCurrent.smallerNumbersThanCurrent(nums);
+        int[] act = NumberSmallerThanCurrent.smallerNumbersThanCurrent2(nums);
         Assertions.assertArrayEquals(exp, act);
+    }
+
+    @Test
+    void smallerNumbersThanCurrent2() {
+        int[] nums = {8, 1, 2, 2, 3};
+        int[] expected = {4, 0, 1, 1, 3};
+        int[] actual = NumberSmallerThanCurrent.smallerNumbersThanCurrent(nums);
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
